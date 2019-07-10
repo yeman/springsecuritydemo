@@ -1,5 +1,7 @@
 package com.yjt.springcloud.demodb.repository;
 
+import com.yjt.springcloud.demodb.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,5 +13,5 @@ import org.springframework.stereotype.Repository;
  * @Date: 2019-07-10 17:53
  **/
 @Repository
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<UserEntity,Long> {
 }
