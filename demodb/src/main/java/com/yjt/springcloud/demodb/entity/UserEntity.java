@@ -1,10 +1,9 @@
 package com.yjt.springcloud.demodb.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -18,11 +17,9 @@ import javax.persistence.*;
  **/
 @Entity
 @Data
-@Builder
-@Accessors(fluent=true)
-@TableName("user")
+@Accessors(chain = true)
+@Table(name="user")
 public class UserEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,7 +27,7 @@ public class UserEntity {
     @Column(name = "username")
     private String userName;
 
-    @JsonIgnore
+    @JSONField(serialize = false)
     @Column(name = "password")
     private String password;
 

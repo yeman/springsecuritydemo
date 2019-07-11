@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.Setter;
 import org.hibernate.Criteria;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,8 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getByUsername(String username) {
-        Example<UserEntity> entityExample = Example.of(UserEntity.builder().build().userName(username));
-        Optional<UserEntity> optional = userRepository.findOne(entityExample);
+        UserEntity userEntity = new UserEntity().setUserName(username);
+        Optional<UserEntity> optional = userRepository.findOne(Example.of(userEntity));
         return optional.isPresent() ? optional.get() : null;
     }
 }
