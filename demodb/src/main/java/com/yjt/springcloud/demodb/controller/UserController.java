@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
     private UserService userService;
@@ -20,7 +20,9 @@ public class UserController {
         model.addAttribute("username",principal.getName());
         return "user";
     }
+
     @GetMapping("/getuser")
+    @ResponseBody
     public UserEntity user(@RequestParam("username") String username){
       return userService.getByUsername(username);
     }
