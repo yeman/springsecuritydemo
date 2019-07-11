@@ -1,4 +1,4 @@
-package com.yjt.springcloud.demo1.controller;
+package com.yjt.springcloud.demo01.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

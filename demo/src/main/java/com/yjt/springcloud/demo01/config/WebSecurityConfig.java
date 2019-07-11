@@ -1,4 +1,4 @@
-package com.yjt.springcloud.demo1.config;
+package com.yjt.springcloud.demo01.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
