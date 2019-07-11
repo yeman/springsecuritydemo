@@ -33,9 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                .antMatchers("/","/index").permitAll()
                .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll().and()
-               .logout().permitAll()
-                .and().csrf().disable();
+               .and().formLogin().loginPage("/login").permitAll()
+               .and().logout().permitAll()
+               .and().csrf().disable();
     }
     //webjar中的静态资源不被拦截
     @Override
