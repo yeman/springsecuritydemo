@@ -5,8 +5,12 @@ import com.yjt.springcloud.demodb.repository.UserRepository;
 import com.yjt.springcloud.demodb.service.UserService;
 import lombok.Data;
 import lombok.Setter;
+import org.hibernate.Criteria;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * @ClassName UserServiceImpl
@@ -17,9 +21,9 @@ import org.springframework.stereotype.Service;
  * @Date: 2019-07-10 18:13
  **/
 @Service
-@Setter
 public class UserServiceImpl implements UserService {
 
+    @Resource
     private  UserRepository userRepository;
 
     @Override
@@ -30,6 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity getByUsername(String username) {
         Example<UserEntity> entityExample = Example.of(UserEntity.builder().build().userName(username));
-        return userRepository.findOne(entityExample).get();
+        Optional<UserEntity> optional = userRepository.findOne(entityExample);
+        return optional.isPresent() ? optional.get() : null;
     }
 }

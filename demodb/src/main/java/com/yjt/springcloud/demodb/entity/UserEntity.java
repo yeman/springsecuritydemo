@@ -1,15 +1,12 @@
 package com.yjt.springcloud.demodb.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 /**
  * @ClassName UserEntity
@@ -33,10 +30,11 @@ public class UserEntity {
     @Column(name = "username")
     private String userName;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
-    @Column(name = "password")
-    private String nickname;
+    @Column(name = "nickname")
+    private String nickName;
 
 }

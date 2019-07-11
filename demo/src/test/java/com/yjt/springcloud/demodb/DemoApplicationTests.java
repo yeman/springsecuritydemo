@@ -1,4 +1,4 @@
-package com.yjt.springcloud.demo1;
+package com.yjt.springcloud.demodb;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
