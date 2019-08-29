@@ -46,7 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        //用户 内存认证管理器
-        auth.inMemoryAuthentication().withUser("root").password(passwordEncoder.encode("root")).roles("admin");
+        //auth.inMemoryAuthentication().withUser("root").password(passwordEncoder.encode("root")).roles("admin");
+        auth.jdbcAuthentication();
     }
 
     @Bean

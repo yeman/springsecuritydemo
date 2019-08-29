@@ -11,7 +11,7 @@
     <artifactId>demodb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demodb</name>
-    <description>Demo project for Spring Boot</description>
+    <description>securitydemo</description>
 
     <dependencies>
         <dependency><!--Web相关依赖-->
@@ -68,6 +68,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${spring-druid-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>${google-collections}</version>
         </dependency>
     </dependencies>
 
