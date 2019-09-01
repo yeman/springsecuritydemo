@@ -1,6 +1,6 @@
 package com.yjt.springcloud.demodb.service;
 
-import com.yjt.springcloud.demodb.entity.UserEntity;
+import com.yjt.springcloud.demodb.entity.User;
 
 /**
  * @ClassName UserService
@@ -13,15 +13,14 @@ import com.yjt.springcloud.demodb.entity.UserEntity;
 public interface UserService {
     /**
      * 添加新用户
-     *
      * username 唯一， 默认 USER 权限
      */
-    void insert(UserEntity userEntity);
+    void insert(User userEntity);
 
     /**
      * 查询用户信息
      * @param username 账号
      * @return UserEntity
      */
-    UserEntity getByUsername(String username);
+    User getByUsername(String username);
 }

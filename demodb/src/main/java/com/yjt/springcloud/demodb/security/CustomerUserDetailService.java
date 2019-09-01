@@ -1,7 +1,7 @@
-package com.yjt.springcloud.demodb.config;
+package com.yjt.springcloud.demodb.security;
 
+import com.yjt.springcloud.demodb.entity.User;
 import com.yjt.springcloud.demodb.entity.UserDetailVo;
-import com.yjt.springcloud.demodb.entity.UserEntity;
 import com.yjt.springcloud.demodb.service.PerssionService;
 import com.yjt.springcloud.demodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DbUserDetailService implements UserDetailsService {
+public class CustomerUserDetailService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
@@ -20,12 +20,12 @@ public class DbUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserEntity userEntity = userService.getByUsername(userName);
+        User userEntity = userService.getByUsername(userName);
         if(userEntity==null){
             throw  new UsernameNotFoundException("用户名不存在");
         }else{
-            userEntity.setPermissionList()
+           // userEntity.setPermissionList(null);
         }
-        return new UserDetailVo(userEntity);
+        return new UserDetailVo(null);
     }
 }

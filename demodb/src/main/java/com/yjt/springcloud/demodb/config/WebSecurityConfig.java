@@ -40,14 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //webjar中的静态资源不被拦截
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/webjars/**", "/img/**","/druid/**");
+        //web.ignoring().antMatchers("/webjars/**", "/img/**","/druid/**");
+        web.ignoring().antMatchers("**");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
        //用户 内存认证管理器
-        //auth.inMemoryAuthentication().withUser("root").password(passwordEncoder.encode("root")).roles("admin");
-        auth.jdbcAuthentication();
+        auth.inMemoryAuthentication().withUser("root").password(passwordEncoder.encode("root")).roles("admin");
+        //auth.jdbcAuthentication();
     }
 
     @Bean

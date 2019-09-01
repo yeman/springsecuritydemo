@@ -14,20 +14,24 @@
     <description>securitydemo</description>
 
     <dependencies>
-        <dependency><!--Web相关依赖-->
+        <!--Web相关依赖-->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency><!--页面模板依赖-->
+        <!--页面模板依赖-->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-        <dependency><!--热部署依赖-->
+        <!--热部署依赖-->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency><!--Webjars省略版本号-->
+        <!--Webjars省略版本号-->
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator-core</artifactId>
         </dependency>
@@ -74,6 +78,16 @@
             <artifactId>google-collections</artifactId>
             <version>${google-collections}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collection}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
     </dependencies>
 
 

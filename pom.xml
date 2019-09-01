@@ -34,6 +34,7 @@
         <hutool.version>4.5.16</hutool.version>
         <spring.boot.starter.jpa.version>2.1.6.RELEASE</spring.boot.starter.jpa.version>
         <google-collections>1.0</google-collections>
+        <commons-collection>4.0</commons-collection>
     </properties>
 
     <dependencies>
@@ -79,6 +80,11 @@
             <groupId>com.google.collections</groupId>
             <artifactId>google-collections</artifactId>
             <version>${google-collections}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collection}</version>
         </dependency>
 
 

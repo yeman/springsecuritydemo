@@ -2,12 +2,15 @@ package com.yjt.springcloud.demodb.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @ClassName UserEntity
@@ -21,13 +24,12 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @Table(name = "t_user")
-public class UserEntity extends BaseEnity {
+public class User extends BaseEnity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username",unique = true,nullable = true)
     private String userName;
 
     @JSONField(serialize = false)
@@ -39,6 +41,9 @@ public class UserEntity extends BaseEnity {
 
     @Column(name = "nick_name")
     private String nickName;
+
+    @Column(name = "job_level")
+    private String jobLevel;
 
     @Column(name = "email")
     private String email;
@@ -55,15 +60,25 @@ public class UserEntity extends BaseEnity {
     @Column(name = "enable")
     private String enable;
 
-    @Column(name = "password_expire_date")
+    @Lob
+    @Column(name = "avatar",columnDefinition = "TEXT")
+    private String avatar;
+
+    @Column(name = "password_expire_date",columnDefinition = "TIMESTAMP")
     private LocalDate passwdWordExpiredDate;
 
-    @Column(name = "account_expire_date")
+    @Column(name = "account_expire_date",columnDefinition = "TIMESTAMP")
     private LocalDate accountExpiredDate;
 
-    private List<Role> roles = Lists.newArrayList();
+    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
+    private Set<UserRole> roles = Sets.newHashSet();
 
-    private List<Permission> permissionList = Lists.newArrayList();
+    @OneToMany(mappedBy = "group",fetch = FetchType.EAGER)
+    private Set<UserGroup> groups = Sets.newHashSet();
 
+    //可选属性optional=false,表示 org 不能为空。删除用户，不影响机构
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
+    @JoinColumn(name="org_id",insertable = false,updatable = false)
+    private Org org;
 
 }

@@ -1,12 +1,14 @@
 package com.yjt.springcloud.demodb.controller;
 
-import com.yjt.springcloud.demodb.entity.UserEntity;
+import com.yjt.springcloud.demodb.entity.User;
 import com.yjt.springcloud.demodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
 
@@ -23,7 +25,7 @@ public class UserController {
 
     @GetMapping("/getuser")
     @ResponseBody
-    public UserEntity user(@RequestParam("username") String username){
+    public User user(@RequestParam("username") String username){
       return userService.getByUsername(username);
     }
 }

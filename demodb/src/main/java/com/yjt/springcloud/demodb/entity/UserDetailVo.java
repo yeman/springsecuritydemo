@@ -9,48 +9,48 @@ import java.util.Collection;
 
 public class UserDetailVo implements UserDetails {
 
-    private UserEntity userEntity;
+    private User user;
 
-    public UserDetailVo(UserEntity userEntity){
-        this.userEntity = userEntity;
+    public UserDetailVo(User user){
+        this.user = user;
     }
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return userEntity.getPermissionList();
+        return null;
     }
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUsername();
+        return user.getUserName();
     }
 
     @Override
     public boolean isAccountNonExpired() {
         LocalDate localDate = LocalDate.now();
-        return !localDate.isAfter(userEntity.getAccountExpiredDate());
+        return !localDate.isAfter(user.getAccountExpiredDate());
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return !YesNoEnum.YES.getKey().equalsIgnoreCase(userEntity.getIsLock());
+        return !YesNoEnum.YES.getKey().equalsIgnoreCase(user.getIsLock());
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
         LocalDate localDate = LocalDate.now();
-        return !localDate.isAfter(userEntity.getPasswdWordExpiredDate());
+        return !localDate.isAfter(user.getPasswdWordExpiredDate());
     }
 
     @Override
     public boolean isEnabled() {
-        return YesNoEnum.YES.getKey().equalsIgnoreCase(userEntity.getEnable());
+        return YesNoEnum.YES.getKey().equalsIgnoreCase(user.getEnable());
     }
 }
