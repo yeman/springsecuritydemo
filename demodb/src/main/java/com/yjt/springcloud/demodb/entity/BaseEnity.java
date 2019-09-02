@@ -8,12 +8,12 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Accessors(chain = true)
 public class BaseEnity implements Serializable {
@@ -24,7 +24,7 @@ public class BaseEnity implements Serializable {
 
     @CreatedDate
     @Column(name="create_time")
-    private Date createTime;
+    private Date createTime = new Date();
 
     @LastModifiedBy
     @Column(name="last_modifier")
@@ -32,5 +32,5 @@ public class BaseEnity implements Serializable {
 
     @LastModifiedDate
     @Column(name="last_modify_time")
-    private Date lastModifyTime;
+    private Date lastModifyTime = new Date();
 }

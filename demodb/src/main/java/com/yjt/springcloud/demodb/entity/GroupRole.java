@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Accessors(chain = true)
-@Table(name = "t_group_permission")
-public class GroupPermission extends BaseEnity {
+@Table(name = "t_group_role")
+public class GroupRole extends BaseEnity {
 
     @Id
     private Long id;
@@ -20,7 +20,7 @@ public class GroupPermission extends BaseEnity {
     private Group group;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)
-    @JoinColumn(name = "permission_id")
-    private Permission permission;
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 }

@@ -1,6 +1,7 @@
 package com.yjt.springcloud.demodb.service;
 
 import com.yjt.springcloud.demodb.entity.Org;
+import com.yjt.springcloud.demodb.entity.dto.OrgTreeVo;
 
 import javax.validation.constraints.NotNull;
 import java.util.Map;
@@ -34,7 +35,7 @@ public interface OrgService {
 
     Org updateOrg(Org org);
 
-    Org tree(Map param);
+    OrgTreeVo tree(Map param);
 
     Org findById(Long orgId);
 }

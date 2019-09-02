@@ -21,9 +21,10 @@
   `sex` varchar(2) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '性别 男:M 女:F',
   `mobile` varchar(30) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
   `is_lock` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '是否锁定 是:Y:否',
+  `enable` varchar(1) COLLATE utf8_bin DEFAULT NULL COMMENT '是否启用',
   `avatar` text COLLATE utf8_bin COMMENT '头像',
-  `password_expire_date` datetime DEFAULT NULL COMMENT '密码有效期',
-  `account_expire_date` datetime DEFAULT NULL COMMENT '账户有效期',
+  `password_expire_date` timestamp NULL DEFAULT NULL COMMENT '密码有效期',
+  `account_expire_date` timestamp NULL DEFAULT NULL COMMENT '账户有效期',
   `creator` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_modifier` datetime DEFAULT NULL COMMENT '修改人',
@@ -34,8 +35,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户信息表'</sql_create_table>
 </table>
 <table name="t_role" view="colnames">
-<left>367</left>
-<top>393</top>
+<left>530</left>
+<top>466</top>
 <width>144</width>
 <height>245</height>
 <sql_create_table>CREATE TABLE `t_role` (
@@ -55,8 +56,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表'</sql_create_table>
 </table>
 <table name="t_permission" view="standard">
-<left>751</left>
-<top>331</top>
+<left>1002</left>
+<top>342</top>
 <width>165</width>
 <height>257</height>
 <sql_create_table>CREATE TABLE `t_permission` (
@@ -144,8 +145,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色表'</sql_create_table>
 </table>
 <table name="t_role_permission" view="colnames">
-<left>566</left>
-<top>454</top>
+<left>782</left>
+<top>529</top>
 <width>144</width>
 <height>194</height>
 <sql_create_table>CREATE TABLE `t_role_permission` (
@@ -183,23 +184,23 @@
   CONSTRAINT `FK_t_user_group_userId` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户组信息'</sql_create_table>
 </table>
-<table name="t_group_permission" view="colnames">
-<left>964</left>
-<top>80</top>
+<table name="t_group_role" view="colnames">
+<left>938</left>
+<top>65</top>
 <width>144</width>
 <height>194</height>
-<sql_create_table>CREATE TABLE `t_group_permission` (
+<sql_create_table>CREATE TABLE `t_group_role` (
   `id` bigint(32) DEFAULT NULL COMMENT '组权限id',
   `group_id` bigint(32) DEFAULT NULL COMMENT '组id',
-  `permission_id` bigint(32) DEFAULT NULL COMMENT '权限id',
+  `role_id` bigint(32) DEFAULT NULL COMMENT '权限id',
   `creator` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_modifier` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   `last_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   KEY `FK_t_group_permission_groupId` (`group_id`),
-  KEY `t_group_permission_permissionId` (`permission_id`),
+  KEY `FK_t_group_permission_roleId` (`role_id`),
   CONSTRAINT `FK_t_group_permission_groupId` FOREIGN KEY (`group_id`) REFERENCES `t_group` (`id`),
-  CONSTRAINT `t_group_permission_permissionId` FOREIGN KEY (`permission_id`) REFERENCES `t_permission` (`id`)
+  CONSTRAINT `FK_t_group_permission_roleId` FOREIGN KEY (`role_id`) REFERENCES `t_role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='组权限信息'</sql_create_table>
 </table>
 <table name="t_role_data_permission" view="colnames">
@@ -231,7 +232,7 @@
   `id` bigint(32) NOT NULL COMMENT '字典id',
   `dic_type` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '字典类型编码',
   `dic_type_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '字典类型名称',
-  `enable` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
+  `enable` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
   `sort_order` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
   `description` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
   `creator` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
@@ -251,7 +252,7 @@
   `dic_id` bigint(32) DEFAULT NULL COMMENT '字典表id',
   `lable_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '编码',
   `label_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '编码名称',
-  `enable` char(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
+  `enable` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
   `sort_order` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
   `description` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
   `creator` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
@@ -274,8 +275,8 @@
   `parameter_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '参数名称',
   `parameter_key` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '参数键',
   `parameter_value` varchar(300) COLLATE utf8_bin DEFAULT NULL COMMENT '参数值',
-  `system_default` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '是否系统默认 是:Y 否:N',
-  `enable` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
+  `system_default` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '是否系统默认 是:Y 否:N',
+  `enable` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
   `sort_order` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
   `creator` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',

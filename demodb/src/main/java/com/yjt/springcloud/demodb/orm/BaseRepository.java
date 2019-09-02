@@ -6,6 +6,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODO
@@ -17,8 +18,15 @@ import java.util.List;
 @NoRepositoryBean
 public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
 
-   /* List<T> findListByNativeSql(String nativeSql, Class<T> clzss);
+    List<T> findListByNativeSql(String nativeSql, Class<T> clzss);
+
+    void batchUpdate(T ... t);
 
     T update(T t);
-*/
+
+    public int executeUpdate(final String hql, Object... values);
+
+    public int executeUpdate(final String hql, Map<String, Object> params);
+
+    public int executeUpdate(final String hql, List<Object> values);
 }

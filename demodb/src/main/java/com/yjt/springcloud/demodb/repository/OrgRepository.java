@@ -15,7 +15,6 @@ import java.util.Optional;
  * author Administrator
  * version V1.0
  */
-@Repository
 public interface OrgRepository extends BaseRepository<Org,Long> {
 
     List<Org> findByParentId(Long orgId);

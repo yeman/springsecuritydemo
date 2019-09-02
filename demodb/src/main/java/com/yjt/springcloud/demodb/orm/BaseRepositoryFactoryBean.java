@@ -20,7 +20,7 @@ import java.io.Serializable;
  * author Administrator
  * version V1.0
  */
-public class BaseRepositoryFactoryBean <R extends JpaRepository<T, Serializable>, T> extends JpaRepositoryFactoryBean<R, T, Serializable> {
+public class BaseRepositoryFactoryBean <R extends JpaRepository<T, I>, T,I extends Serializable> extends JpaRepositoryFactoryBean<R, T, I> {
 
     public BaseRepositoryFactoryBean(Class<? extends R> repositoryInterface) {
         super(repositoryInterface);
@@ -30,10 +30,10 @@ public class BaseRepositoryFactoryBean <R extends JpaRepository<T, Serializable>
     protected RepositoryFactorySupport createRepositoryFactory(final EntityManager entityManager) {
         return new JpaRepositoryFactory(entityManager){
             @Override
-            protected JpaRepositoryImplementation<T, Serializable> getTargetRepository(RepositoryInformation information, EntityManager entityManager) {
+            protected JpaRepositoryImplementation<T, I> getTargetRepository(RepositoryInformation information, EntityManager entityManager) {
                 Class<T> domainClass = (Class<T>) information.getDomainType();
                 if(BaseEnity.class.isAssignableFrom(domainClass)){
-                    return new BaseRepositoryImpl(domainClass,entityManager);
+                     return new BaseRepositoryImpl(domainClass,entityManager);
                 }else {
                     return new SimpleJpaRepository(domainClass, entityManager);
                 }
@@ -41,7 +41,7 @@ public class BaseRepositoryFactoryBean <R extends JpaRepository<T, Serializable>
 
             @Override
             protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
-                return metadata.getDomainType().isAssignableFrom(BaseEnity.class) ? BaseRepositoryImpl.class : SimpleJpaRepository.class;
+                return BaseEnity.class.isAssignableFrom(metadata.getDomainType()) ? BaseRepositoryImpl.class : SimpleJpaRepository.class;
             }
         };
     }

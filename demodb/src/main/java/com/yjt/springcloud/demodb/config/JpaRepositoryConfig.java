@@ -2,7 +2,6 @@ package com.yjt.springcloud.demodb.config;
 
 import com.yjt.springcloud.demodb.orm.BaseRepositoryFactoryBean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
@@ -13,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * version V1.0
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.yjt.springcloud.demodb.repository"},repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
+@EnableJpaRepositories(basePackages = {"com.yjt.springcloud.demodb.repository"},
+                       repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 public class JpaRepositoryConfig {
 }

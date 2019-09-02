@@ -53,9 +53,6 @@ public class Permission extends BaseEnity implements GrantedAuthority {
     @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
     private Set<RolePermission> roles = Sets.newHashSet();
 
-    @OneToMany(mappedBy = "group",fetch = FetchType.EAGER)
-    private Set<GroupPermission> groups = Sets.newHashSet();
-
     @Override
     public String getAuthority() {
         return null;

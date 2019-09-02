@@ -1,17 +1,17 @@
 package com.yjt.springcloud.demodb.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.google.common.collect.Lists;
 import com.yjt.springcloud.demodb.entity.Org;
 import com.yjt.springcloud.demodb.entity.User;
+import com.yjt.springcloud.demodb.entity.dto.OrgTreeVo;
 import com.yjt.springcloud.demodb.exception.BusinessException;
 import com.yjt.springcloud.demodb.repository.OrgRepository;
 import com.yjt.springcloud.demodb.repository.UserRepository;
 import com.yjt.springcloud.demodb.service.OrgService;
+import com.yjt.springcloud.demodb.service.mapper.OrgMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -37,6 +37,9 @@ public class OrgServiceImpl implements OrgService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrgMapper orgMapper;
 
     @Override
     public Org insert(@NotNull Org org) {
@@ -68,16 +71,16 @@ public class OrgServiceImpl implements OrgService {
 
     @Override
     public Org updateOrg(Org org) {
-        return orgRepository.up
+        return orgRepository.update(org);
     }
 
     @Override
-    public Org tree(Map param) {
+    public OrgTreeVo tree(Map param) {
         if (MapUtils.getLong(param, "id") != null) {
             Optional<Org> current = orgRepository.findById(MapUtils.getLong(param, "id"));
             if(current.isPresent()){
-                Org org =  bulidLeaf(current.get(), Lists.newArrayList());
-                return org;
+                Org org=  bulidLeaf(current.get(), Lists.newArrayList());
+                return orgMapper.toDto(org);
             }
         } else {
             // TODO

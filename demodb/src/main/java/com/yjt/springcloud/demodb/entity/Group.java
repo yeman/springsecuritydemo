@@ -36,7 +36,7 @@ public class Group extends BaseEnity{
     @OneToMany(mappedBy = "user")
     private Set<UserGroup> users = Sets.newHashSet();
 
-    @OneToMany(mappedBy = "permission")
-    private Set<GroupPermission> permissions = Sets.newHashSet();
+    @OneToMany(mappedBy = "role")
+    private Set<GroupRole> groupRoles = Sets.newHashSet();
 
 }

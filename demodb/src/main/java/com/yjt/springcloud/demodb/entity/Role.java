@@ -47,4 +47,7 @@ public class Role extends BaseEnity{
 
     @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
     private Set<RoleDataPermission> roleDataPermissions = Sets.newHashSet();
+
+    @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
+    private Set<GroupRole> groupRoles = Sets.newHashSet();
 }

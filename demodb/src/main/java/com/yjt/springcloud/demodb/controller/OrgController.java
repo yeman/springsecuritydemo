@@ -57,7 +57,7 @@ public class OrgController {
      * @param orgId
      * @return com.yjt.springcloud.demodb.web.JsonTemplate
      */
-    @PostMapping("get/{orgId}")
+    @GetMapping("get/{orgId}")
     public JsonTemplate get(@PathVariable Long orgId){
         return JsonTemplate.success(orgService.findById(orgId),"查询成功");
     }
