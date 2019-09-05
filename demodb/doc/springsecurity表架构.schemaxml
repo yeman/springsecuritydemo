@@ -7,7 +7,7 @@
 <tables>
 <table name="t_user" view="colnames">
 <left>249</left>
-<top>15</top>
+<top>16</top>
 <width>175</width>
 <height>308</height>
 <sql_create_table>CREATE TABLE `t_user` (
@@ -27,7 +27,7 @@
   `account_expire_date` timestamp NULL DEFAULT NULL COMMENT '账户有效期',
   `creator` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `last_modifier` datetime DEFAULT NULL COMMENT '修改人',
+  `last_modifier` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   `last_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   KEY `FK_t_user_orgId` (`org_id`),
@@ -38,7 +38,7 @@
 <left>530</left>
 <top>466</top>
 <width>144</width>
-<height>245</height>
+<height>279</height>
 <sql_create_table>CREATE TABLE `t_role` (
   `id` bigint(32) NOT NULL COMMENT '角色id主键',
   `role_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '角色名称',
@@ -56,10 +56,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表'</sql_create_table>
 </table>
 <table name="t_permission" view="standard">
-<left>1002</left>
-<top>342</top>
-<width>165</width>
-<height>257</height>
+<left>1003</left>
+<top>343</top>
+<width>282</width>
+<height>308</height>
 <sql_create_table>CREATE TABLE `t_permission` (
   `id` bigint(32) NOT NULL COMMENT '权限id',
   `permission_type` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '权限类型 模块:module 菜单:menu 按钮:button 其它:other',
@@ -81,8 +81,8 @@
 </table>
 <table name="t_org" view="colnames">
 <left>18</left>
-<top>17</top>
-<width>191</width>
+<top>18</top>
+<width>174</width>
 <height>308</height>
 <sql_create_table>CREATE TABLE `t_org` (
   `id` bigint(32) NOT NULL COMMENT '机构id',
@@ -145,7 +145,7 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色表'</sql_create_table>
 </table>
 <table name="t_role_permission" view="colnames">
-<left>782</left>
+<left>783</left>
 <top>529</top>
 <width>144</width>
 <height>194</height>
@@ -186,7 +186,7 @@
 </table>
 <table name="t_group_role" view="colnames">
 <left>938</left>
-<top>65</top>
+<top>66</top>
 <width>144</width>
 <height>194</height>
 <sql_create_table>CREATE TABLE `t_group_role` (
@@ -206,7 +206,7 @@
 <table name="t_role_data_permission" view="colnames">
 <left>203</left>
 <top>664</top>
-<width>173</width>
+<width>144</width>
 <height>194</height>
 <sql_create_table>CREATE TABLE `t_role_data_permission` (
   `id` bigint(32) NOT NULL COMMENT '角色数据权限id',
@@ -225,7 +225,7 @@
 </table>
 <table name="t_sys_dic" view="colnames">
 <left>18</left>
-<top>907</top>
+<top>908</top>
 <width>144</width>
 <height>245</height>
 <sql_create_table>CREATE TABLE `t_sys_dic` (
@@ -243,8 +243,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表'</sql_create_table>
 </table>
 <table name="t_sys_dic_item" view="colnames">
-<left>247</left>
-<top>905</top>
+<left>248</left>
+<top>906</top>
 <width>144</width>
 <height>262</height>
 <sql_create_table>CREATE TABLE `t_sys_dic_item` (
@@ -265,7 +265,7 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表字典'</sql_create_table>
 </table>
 <table name="t_sys_parameter" view="colnames">
-<left>555</left>
+<left>556</left>
 <top>873</top>
 <width>146</width>
 <height>296</height>
