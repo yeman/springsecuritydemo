@@ -38,4 +38,6 @@ public interface OrgService {
     OrgTreeVo tree(Map param);
 
     Org findById(Long orgId);
+
+    Boolean checkLevel(Map param);
 }

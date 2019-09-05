@@ -1,7 +1,6 @@
 package com.yjt.springcloud.demodb.entity.dto;
 
 import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,6 +19,8 @@ public class OrgTreeVo implements Serializable {
     private Long id;
 
     private String orgName;
+
+    private String sortOrder;
 
     private List<OrgTreeVo> children = Lists.newArrayList();
 }

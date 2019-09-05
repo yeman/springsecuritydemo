@@ -4,6 +4,7 @@ import com.yjt.springcloud.demodb.entity.Org;
 import com.yjt.springcloud.demodb.service.OrgService;
 import com.yjt.springcloud.demodb.web.JsonTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,6 +87,5 @@ public class OrgController {
     public JsonTemplate tree(@RequestBody Map param){
         return JsonTemplate.success(orgService.tree(param),"查询成功");
     }
-
 
 }
