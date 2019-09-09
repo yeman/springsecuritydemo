@@ -2,6 +2,7 @@ package com.yjt.springcloud.demodb.entity;
 
 import com.google.common.collect.Sets;
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -9,12 +10,11 @@ import java.util.Set;
 
 @Entity
 @Data
-@Accessors(chain = true)
+@ToString(exclude = {"roleDataPermissions"})
 @Table(name = "t_role")
 public class Role extends BaseEnity{
 
     @Id
-
     private Long id;
 
     @Column(name = "role_name")

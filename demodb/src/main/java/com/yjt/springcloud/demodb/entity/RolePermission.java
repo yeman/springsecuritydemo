@@ -1,6 +1,7 @@
 package com.yjt.springcloud.demodb.entity;
 
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;

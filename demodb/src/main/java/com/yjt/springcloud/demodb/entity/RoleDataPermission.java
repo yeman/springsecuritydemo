@@ -2,6 +2,7 @@ package com.yjt.springcloud.demodb.entity;
 
 
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.aspectj.weaver.ast.Or;
 
@@ -14,14 +15,13 @@ import javax.persistence.*;
 public class RoleDataPermission extends BaseEnity{
 
     @Id
-
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "role_id",nullable = false)
     private Role role;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "org_id",nullable = false)
     private Org org;
 }

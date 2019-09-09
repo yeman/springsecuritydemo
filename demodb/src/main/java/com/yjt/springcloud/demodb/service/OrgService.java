@@ -39,5 +39,4 @@ public interface OrgService {
 
     Org findById(Long orgId);
 
-    Boolean checkLevel(Map param);
 }
