@@ -3,13 +3,13 @@
 <source>
 <database charset="utf8" collation="utf8_bin">springsecurity</database>
 </source>
-<canvas zoom="100">
+<canvas zoom="90">
 <tables>
 <table name="t_user" view="colnames">
-<left>249</left>
-<top>16</top>
-<width>175</width>
-<height>308</height>
+<left>212</left>
+<top>14</top>
+<width>196</width>
+<height>277</height>
 <sql_create_table>CREATE TABLE `t_user` (
   `id` bigint(32) NOT NULL COMMENT '主键',
   `username` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '用户名',
@@ -35,10 +35,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户信息表'</sql_create_table>
 </table>
 <table name="t_role" view="colnames">
-<left>530</left>
-<top>466</top>
-<width>144</width>
-<height>279</height>
+<left>379</left>
+<top>381</top>
+<width>152</width>
+<height>241</height>
 <sql_create_table>CREATE TABLE `t_role` (
   `id` bigint(32) NOT NULL COMMENT '角色id主键',
   `role_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '角色名称',
@@ -56,10 +56,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表'</sql_create_table>
 </table>
 <table name="t_permission" view="standard">
-<left>1003</left>
-<top>343</top>
-<width>282</width>
-<height>308</height>
+<left>843</left>
+<top>315</top>
+<width>254</width>
+<height>277</height>
 <sql_create_table>CREATE TABLE `t_permission` (
   `id` bigint(32) NOT NULL COMMENT '权限id',
   `permission_type` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '权限类型 模块:module 菜单:menu 按钮:button 其它:other',
@@ -80,10 +80,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='权限表'</sql_create_table>
 </table>
 <table name="t_org" view="colnames">
-<left>18</left>
-<top>18</top>
-<width>174</width>
-<height>308</height>
+<left>16</left>
+<top>16</top>
+<width>130</width>
+<height>277</height>
 <sql_create_table>CREATE TABLE `t_org` (
   `id` bigint(32) NOT NULL COMMENT '机构id',
   `org_code` varchar(16) COLLATE utf8_bin DEFAULT NULL COMMENT '机构编码',
@@ -106,10 +106,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='机构信息'</sql_create_table>
 </table>
 <table name="t_group" view="colnames">
-<left>719</left>
-<top>24</top>
-<width>144</width>
-<height>245</height>
+<left>869</left>
+<top>8</top>
+<width>130</width>
+<height>221</height>
 <sql_create_table>CREATE TABLE `t_group` (
   `id` bigint(32) NOT NULL COMMENT '组id',
   `group_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '组名称',
@@ -125,10 +125,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='组信息'</sql_create_table>
 </table>
 <table name="t_user_role" view="colnames">
-<left>21</left>
-<top>409</top>
-<width>144</width>
-<height>194</height>
+<left>19</left>
+<top>368</top>
+<width>130</width>
+<height>175</height>
 <sql_create_table>CREATE TABLE `t_user_role` (
   `id` bigint(32) NOT NULL COMMENT '用户角色id',
   `user_id` bigint(32) DEFAULT NULL COMMENT '用户id',
@@ -145,10 +145,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色表'</sql_create_table>
 </table>
 <table name="t_role_permission" view="colnames">
-<left>783</left>
-<top>529</top>
-<width>144</width>
-<height>194</height>
+<left>625</left>
+<top>535</top>
+<width>130</width>
+<height>175</height>
 <sql_create_table>CREATE TABLE `t_role_permission` (
   `id` bigint(32) NOT NULL COMMENT '角色权限id',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
@@ -165,10 +165,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色权限'</sql_create_table>
 </table>
 <table name="t_user_group" view="colnames">
-<left>481</left>
-<top>21</top>
-<width>144</width>
-<height>194</height>
+<left>433</left>
+<top>19</top>
+<width>130</width>
+<height>175</height>
 <sql_create_table>CREATE TABLE `t_user_group` (
   `id` bigint(32) NOT NULL COMMENT '用户组关系id',
   `user_id` bigint(32) DEFAULT NULL COMMENT '用户id',
@@ -185,10 +185,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户组信息'</sql_create_table>
 </table>
 <table name="t_group_role" view="colnames">
-<left>938</left>
-<top>66</top>
-<width>144</width>
-<height>194</height>
+<left>644</left>
+<top>200</top>
+<width>130</width>
+<height>175</height>
 <sql_create_table>CREATE TABLE `t_group_role` (
   `id` bigint(32) DEFAULT NULL COMMENT '组权限id',
   `group_id` bigint(32) DEFAULT NULL COMMENT '组id',
@@ -204,10 +204,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='组权限信息'</sql_create_table>
 </table>
 <table name="t_role_data_permission" view="colnames">
-<left>203</left>
-<top>664</top>
-<width>144</width>
-<height>194</height>
+<left>167</left>
+<top>601</top>
+<width>174</width>
+<height>175</height>
 <sql_create_table>CREATE TABLE `t_role_data_permission` (
   `id` bigint(32) NOT NULL COMMENT '角色数据权限id',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
@@ -224,10 +224,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色数据权限'</sql_create_table>
 </table>
 <table name="t_sys_dic" view="colnames">
-<left>18</left>
-<top>908</top>
-<width>144</width>
-<height>245</height>
+<left>16</left>
+<top>817</top>
+<width>130</width>
+<height>221</height>
 <sql_create_table>CREATE TABLE `t_sys_dic` (
   `id` bigint(32) NOT NULL COMMENT '字典id',
   `dic_type` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '字典类型编码',
@@ -243,10 +243,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表'</sql_create_table>
 </table>
 <table name="t_sys_dic_item" view="colnames">
-<left>248</left>
-<top>906</top>
-<width>144</width>
-<height>262</height>
+<left>223</left>
+<top>815</top>
+<width>130</width>
+<height>236</height>
 <sql_create_table>CREATE TABLE `t_sys_dic_item` (
   `id` bigint(32) NOT NULL COMMENT 'id',
   `dic_id` bigint(32) DEFAULT NULL COMMENT '字典表id',
@@ -265,10 +265,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表字典'</sql_create_table>
 </table>
 <table name="t_sys_parameter" view="colnames">
-<left>556</left>
-<top>873</top>
-<width>146</width>
-<height>296</height>
+<left>500</left>
+<top>786</top>
+<width>131</width>
+<height>266</height>
 <sql_create_table>CREATE TABLE `t_sys_parameter` (
   `id` bigint(32) NOT NULL COMMENT 'id',
   `parameter_group` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '参数组',

@@ -83,4 +83,16 @@ public class RoleController {
         return JsonTemplate.success(null,"角色删除成功");
     }
 
+    /*
+     * 角色数据权限
+     * @author Administrator
+     * @date 2019-09-10 7:38
+     * @param
+     * @return com.yjt.springcloud.demodb.web.JsonTemplate
+     */
+    @PostMapping("roleDataPermission")
+    public JsonTemplate roleDataPermission(){
+        return null;
+    }
+
 }
