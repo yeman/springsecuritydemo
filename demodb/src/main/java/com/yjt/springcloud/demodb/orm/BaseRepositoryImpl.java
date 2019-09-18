@@ -1,12 +1,17 @@
 package com.yjt.springcloud.demodb.orm;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.Predicate;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -82,4 +87,5 @@ public class BaseRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRep
                 }
             }
         }
+
     }

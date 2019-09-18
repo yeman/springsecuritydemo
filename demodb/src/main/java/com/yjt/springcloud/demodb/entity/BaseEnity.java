@@ -1,5 +1,6 @@
 package com.yjt.springcloud.demodb.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -24,6 +25,7 @@ public class BaseEnity implements Serializable {
 
     @CreatedDate
     @Column(name="create_time")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createTime = new Date();
 
     @LastModifiedBy
@@ -32,5 +34,6 @@ public class BaseEnity implements Serializable {
 
     @LastModifiedDate
     @Column(name="last_modify_time")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date lastModifyTime = new Date();
 }

@@ -1,8 +1,12 @@
 package com.yjt.springcloud.demodb.orm;
 
 import com.yjt.springcloud.demodb.entity.BaseEnity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +20,7 @@ import java.util.Map;
  * version V1.0
  */
 @NoRepositoryBean
-public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
+public interface BaseRepository<T, ID> extends JpaRepository<T, ID>{
 
     List<T> findListByNativeSql(String nativeSql, Class<T> clzss);
 
@@ -29,4 +33,6 @@ public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
     public int executeUpdate(final String hql, Map<String, Object> params);
 
     public int executeUpdate(final String hql, List<Object> values);
+
+    public Page<T> findAll(@Nullable Specification<T> spec, Pageable pageable);
 }

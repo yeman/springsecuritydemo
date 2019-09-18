@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.yjt.springsecurity</groupId>
     <artifactId>springsecurity</artifactId>
@@ -36,6 +36,8 @@
         <google-collections>1.0</google-collections>
         <commons-collection>4.0</commons-collection>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
+        <slf4j-api>1.7.25</slf4j-api>
+        <commons-log>1.2</commons-log>
     </properties>
 
     <dependencies>
@@ -71,7 +73,17 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${commons-log}</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>

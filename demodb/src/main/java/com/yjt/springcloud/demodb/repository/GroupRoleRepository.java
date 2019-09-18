@@ -1,8 +1,17 @@
 package com.yjt.springcloud.demodb.repository;
 
+import com.yjt.springcloud.demodb.entity.Group;
 import com.yjt.springcloud.demodb.entity.GroupRole;
 import com.yjt.springcloud.demodb.orm.BaseRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.yjt.springcloud.demodb.service.dto.GroupRoleQueryCriteria;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.Nullable;
+
+import java.util.List;
 
 /**
  * 组角色
@@ -12,4 +21,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * version V1.0
  */
 public interface GroupRoleRepository extends BaseRepository<GroupRole,Long> {
+
+    List<GroupRole> findByGroup(Group group);
+
+    @Modifying
+    @Query("delete from GroupRole g where g.group.groupId=?1")
+    void deleteByGroup(Long groupId);
 }

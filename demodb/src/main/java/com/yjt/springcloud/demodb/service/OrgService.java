@@ -31,12 +31,12 @@ public interface OrgService {
      * @param org
      * @return void
      */
-    void delete(Long org);
+    void delete(@NotNull Long org);
 
     Org updateOrg(Org org);
 
     OrgTreeVo tree(Map param);
 
-    Org findById(Long orgId);
+    Org findById(@NotNull Long orgId);
 
 }

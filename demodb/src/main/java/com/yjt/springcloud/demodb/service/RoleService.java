@@ -1,7 +1,10 @@
 package com.yjt.springcloud.demodb.service;
 
 import com.yjt.springcloud.demodb.entity.Role;
+import com.yjt.springcloud.demodb.entity.dto.RoleTreeVo;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,9 +19,13 @@ public interface RoleService {
 
     Role update(Role role);
 
-    Role findById(Long roleId);
+    Role findById(@NotNull Long roleId);
 
     Role updateStateById(Map param);
 
-    void deleteById(Long roleId);
+    void deleteById(@NotNull Long roleId);
+
+    void assginUser(List<Long> userIds, Long roleId);
+
+    RoleTreeVo tree(Map param);
 }

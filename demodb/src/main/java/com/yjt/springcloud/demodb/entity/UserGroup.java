@@ -12,7 +12,6 @@ import javax.persistence.*;
 public class UserGroup extends BaseEnity {
 
     @Id
-
     private Long id;
 
     @ManyToOne
