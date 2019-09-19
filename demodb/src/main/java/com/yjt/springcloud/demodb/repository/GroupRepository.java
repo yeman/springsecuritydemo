@@ -1,8 +1,12 @@
 package com.yjt.springcloud.demodb.repository;
 
 import com.yjt.springcloud.demodb.entity.Group;
+import com.yjt.springcloud.demodb.entity.Role;
 import com.yjt.springcloud.demodb.orm.BaseRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 组
@@ -12,4 +16,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * version V1.0
  */
 public interface GroupRepository extends BaseRepository<Group,Long> {
+
+    List<Group> findByParentId(Long groupId);
+
+    Optional<Group> findByParentIdIsNull();
 }

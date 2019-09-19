@@ -27,8 +27,8 @@ public class GlobalExpcetionHandler {
     @ExceptionHandler(value = Exception.class)
     public JsonTemplate errorHandler(HttpServletRequest request, HttpServletResponse response,Exception e){
         String stackError = ExceptionUtil.stacktraceToString(e);
-        log.error("errorHandler info:{}",stackError);
-        JsonTemplate jsonTemplate = JsonTemplate.failed(e.getMessage(),stackError);
+        log.error("error stack:{}",stackError);
+        JsonTemplate jsonTemplate = JsonTemplate.failed("系统异常",stackError);
         return jsonTemplate;
     }
 }

@@ -66,7 +66,7 @@ public class OrgController {
      * 机构修改
      * @author Administrator
      * @date 2019-09-01 20:03
-     * @param orgId
+     * @param org
      * @return com.yjt.springcloud.demodb.web.JsonTemplate
      */
     @PostMapping("update")

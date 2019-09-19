@@ -1,13 +1,16 @@
 package com.yjt.springcloud.demodb.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @Table(name = "t_role_permission")
 public class RolePermission extends  BaseEnity{

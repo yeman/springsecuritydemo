@@ -1,5 +1,6 @@
 package com.yjt.springcloud.demodb.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yjt.springcloud.demodb.entity.Role;
 import com.yjt.springcloud.demodb.service.RoleService;
 import com.yjt.springcloud.demodb.web.JsonTemplate;
@@ -7,10 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
- * TODO
+ * 角色
  * ClassName: RoleController
  * Date: 2019-09-05 20:02
  * author Administrator
@@ -84,15 +86,33 @@ public class RoleController {
     }
 
     /*
-     * 角色数据权限
+     * 角色分配用户
      * @author Administrator
      * @date 2019-09-10 7:38
      * @param
      * @return com.yjt.springcloud.demodb.web.JsonTemplate
      */
-    @PostMapping("roleDataPermission")
-    public JsonTemplate roleDataPermission(){
-        return null;
+    @PostMapping("assignUser")
+    public JsonTemplate assignUser(@RequestBody JSONObject jsonObject){
+        Long roleId = jsonObject.getLong("roleId");
+        List userIds = jsonObject.getJSONArray("userIds").toJavaList(Long.class);
+        roleService.assginUser(userIds,roleId);
+        return JsonTemplate.success(null,"角色分配人员成功");
     }
+
+    /*
+     * 角色树
+     * @author Administrator
+     * @date 2019-09-11 20:24
+     * @param param
+     * @return com.yjt.springcloud.demodb.web.JsonTemplate
+     */
+    @PostMapping("tree")
+    public JsonTemplate tree(@RequestBody Map param){
+        return JsonTemplate.success(roleService.tree(param),"角色树查询成功");
+    }
+
+
+
 
 }
