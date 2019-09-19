@@ -1,6 +1,6 @@
 package com.yjt.springcloud.demo01.controller;
 
-import com.baomidou.kaptcha.Kaptcha;
+//import com.baomidou.kaptcha.Kaptcha;
 import com.yjt.springcloud.demo01.validatecode.Captcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("kaptcha")
 public class ValidateCodeController {
-    @Autowired
+   /* @Autowired
     private Kaptcha kaptcha;
 
     @GetMapping("/render")
@@ -32,7 +32,7 @@ public class ValidateCodeController {
     @PostMapping("/validTime")
     public void validWithTime(@RequestParam String code) {
         kaptcha.validate(code, 60);
-    }
+    }*/
 
 
 }
