@@ -43,7 +43,7 @@
             <version>${webjar.bootstrap.version}</version>
         </dependency>
         <!-- 验证码 -->
-        <!--<dependency>
+       <!-- <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>kaptcha-spring-boot-starter</artifactId>
             <version>1.0.0</version>
@@ -53,12 +53,24 @@
             <groupId>com.octo.captcha</groupId>
             <artifactId>jcaptcha</artifactId>
             <version>1.0</version>
+           <!-- 和  baomidou的kaptcha 包有冲突
             <exclusions>
                 <exclusion>
                     <groupId>com.jhlabs</groupId>
                     <artifactId>filters</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!-- minio -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>3.0.10</version>
         </dependency>
     </dependencies>
 

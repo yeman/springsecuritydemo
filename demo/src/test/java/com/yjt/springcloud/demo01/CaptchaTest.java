@@ -1,5 +1,12 @@
 package com.yjt.springcloud.demo01;
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.CircleCaptcha;
+import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.captcha.ShearCaptcha;
+import cn.hutool.captcha.generator.CodeGenerator;
+import cn.hutool.captcha.generator.MathGenerator;
+import cn.hutool.captcha.generator.RandomGenerator;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ImageUtil;
 import com.octo.captcha.component.image.backgroundgenerator.*;
@@ -105,5 +112,33 @@ public class CaptchaTest {
             }
         }
 
+    }
+
+    //干扰线 数字字母验证码
+    @Test
+    public void testHutoolImage01(){
+        LineCaptcha  lineCaptcha =  CaptchaUtil.createLineCaptcha(300,100);
+        CodeGenerator generator = new RandomGenerator(5);
+        lineCaptcha.setGenerator(generator);
+        lineCaptcha.createImage(generator.generate());
+        lineCaptcha.write(new File("C:\\\\Users\\\\Administrator\\\\Pictures\\\\验证码2.jpg"));
+    }
+    //扭曲干扰数学验证码
+    @Test
+    public void testHutoolImage02(){
+        ShearCaptcha captcha =  CaptchaUtil.createShearCaptcha(160,60);
+        CodeGenerator generator = new MathGenerator(2);
+        captcha.setGenerator(generator);
+        captcha.createImage(generator.generate());
+        captcha.write(new File("C:\\\\Users\\\\Administrator\\\\Pictures\\\\验证码3.jpg"));
+    }
+    //圈圈干扰数学验证码
+    @Test
+    public void testHutoolImage03(){
+        CircleCaptcha captcha =  CaptchaUtil.createCircleCaptcha(160,60);
+        CodeGenerator generator = new MathGenerator(2);
+        captcha.setGenerator(generator);
+        captcha.createImage(generator.generate());
+        captcha.write(new File("C:\\\\Users\\\\Administrator\\\\Pictures\\\\验证码4.jpg"));
     }
 }

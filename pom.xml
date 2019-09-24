@@ -31,7 +31,6 @@
         <mysql.version>8.0.11</mysql.version>
         <oauth2.autoconfigure.version>2.1.2.RELEASE</oauth2.autoconfigure.version>
         <fastjson.version>1.2.46</fastjson.version>
-        <hutool.version>4.5.16</hutool.version>
         <spring.boot.starter.jpa.version>2.1.6.RELEASE</spring.boot.starter.jpa.version>
         <google-collections>1.0</google-collections>
         <commons-collection>4.0</commons-collection>
