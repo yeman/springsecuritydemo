@@ -3,10 +3,9 @@ package com.yjt.springcloud.demodb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yjt.springcloud.demodb.entity.Group;
-import com.yjt.springcloud.demodb.entity.GroupRole;
 import com.yjt.springcloud.demodb.service.GroupService;
-import com.yjt.springcloud.demodb.service.dto.GroupRoleQueryCriteria;
-import com.yjt.springcloud.demodb.service.dto.GroupUserQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.GroupRoleQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.GroupUserQueryCriteria;
 import com.yjt.springcloud.demodb.web.JsonTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +23,7 @@ import java.util.Map;
  * version V1.0
  */
 @RestController
-@RequestMapping("group")
+@RequestMapping("system/group")
 public class GroupController {
     @Autowired
     private GroupService groupService;
@@ -97,8 +96,8 @@ public class GroupController {
      * @param
      * @return com.yjt.springcloud.demodb.web.JsonTemplate
      */
-    @PostMapping("groupRole")
-    public JsonTemplate groupRole(@RequestBody GroupRoleQueryCriteria criteria, @PageableDefault(value = 10, sort = {"createTime"}, direction = Sort.Direction.ASC) Pageable pageable){
+    @PostMapping("groupRolePage")
+    public JsonTemplate groupRole(GroupRoleQueryCriteria criteria, @PageableDefault(value = 10, sort = {"createTime"}, direction = Sort.Direction.ASC) Pageable pageable){
         return JsonTemplate.success(groupService.groupRole(criteria,pageable),"查询成功");
     }
     /*
@@ -110,7 +109,7 @@ public class GroupController {
      */
     @PostMapping("assginRole")
     public JsonTemplate assginRole(@RequestBody JSONObject jsonObject){
-        groupService.assginRole(jsonObject);
+        groupService.insertRole(jsonObject);
         return JsonTemplate.success(null,"组角色分配成功");
     }
 
@@ -135,8 +134,8 @@ public class GroupController {
      * @param pageable
      * @return com.yjt.springcloud.demodb.web.JsonTemplate
      */
-    @PostMapping("groupUser")
-    public JsonTemplate groupUser(@RequestBody GroupUserQueryCriteria criteria, @PageableDefault(value = 10, sort = {"createTime"}, direction = Sort.Direction.ASC) Pageable pageable){
+    @PostMapping("groupUserPage")
+    public JsonTemplate groupUserPage(GroupUserQueryCriteria criteria, @PageableDefault(value = 10, sort = {"createTime"}, direction = Sort.Direction.ASC) Pageable pageable){
         return JsonTemplate.success(groupService.groupUser(criteria,pageable),"查询成功");
     }
 
@@ -149,7 +148,7 @@ public class GroupController {
      */
     @PostMapping("assginUser")
     public JsonTemplate assginUser(@RequestBody JSONObject jsonObject){
-        groupService.assginUser(jsonObject);
+        groupService.insertUser(jsonObject);
         return JsonTemplate.success(null,"组人员分配成功");
     }
 

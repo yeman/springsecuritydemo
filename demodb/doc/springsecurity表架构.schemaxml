@@ -8,7 +8,7 @@
 <table name="t_user" view="colnames">
 <left>212</left>
 <top>14</top>
-<width>196</width>
+<width>158</width>
 <height>277</height>
 <sql_create_table>CREATE TABLE `t_user` (
   `id` bigint(32) NOT NULL COMMENT '主键',
@@ -37,8 +37,8 @@
 <table name="t_role" view="colnames">
 <left>379</left>
 <top>381</top>
-<width>152</width>
-<height>241</height>
+<width>130</width>
+<height>251</height>
 <sql_create_table>CREATE TABLE `t_role` (
   `id` bigint(32) NOT NULL COMMENT '角色id主键',
   `role_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '角色名称',
@@ -46,7 +46,7 @@
   `data_scope` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '数据范围',
   `state` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
   `sort_order` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
-  `parent_role_id` bigint(32) DEFAULT NULL COMMENT '父角色id',
+  `parent_id` bigint(32) DEFAULT NULL COMMENT '父角色id',
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '角色描述',
   `creator` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -56,10 +56,10 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表'</sql_create_table>
 </table>
 <table name="t_permission" view="standard">
-<left>843</left>
+<left>844</left>
 <top>315</top>
-<width>254</width>
-<height>277</height>
+<width>233</width>
+<height>348</height>
 <sql_create_table>CREATE TABLE `t_permission` (
   `id` bigint(32) NOT NULL COMMENT '权限id',
   `permission_type` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '权限类型 模块:module 菜单:menu 按钮:button 其它:other',
@@ -68,6 +68,7 @@
   `open_type` varchar(10) COLLATE utf8_bin DEFAULT NULL COMMENT '打开方式 页签内:tab 窗口:window',
   `icon` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '图标标识',
   `permission_expression` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '权限表达式',
+  `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'URL地址',
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '权限描述',
   `parent_id` bigint(32) DEFAULT NULL COMMENT '父权限id',
   `sort_order` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
@@ -113,7 +114,7 @@
 <sql_create_table>CREATE TABLE `t_group` (
   `id` bigint(32) NOT NULL COMMENT '组id',
   `group_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '组名称',
-  `parent_group_id` bigint(32) DEFAULT NULL COMMENT '父id',
+  `parent_id` bigint(32) DEFAULT NULL COMMENT '父id',
   `sort_order` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
   `description` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '描述',
   `enable` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
@@ -147,8 +148,8 @@
 <table name="t_role_permission" view="colnames">
 <left>625</left>
 <top>535</top>
-<width>130</width>
-<height>175</height>
+<width>141</width>
+<height>197</height>
 <sql_create_table>CREATE TABLE `t_role_permission` (
   `id` bigint(32) NOT NULL COMMENT '角色权限id',
   `role_id` bigint(32) DEFAULT NULL COMMENT '角色id',
@@ -186,7 +187,7 @@
 </table>
 <table name="t_group_role" view="colnames">
 <left>644</left>
-<top>200</top>
+<top>201</top>
 <width>130</width>
 <height>175</height>
 <sql_create_table>CREATE TABLE `t_group_role` (
@@ -206,7 +207,7 @@
 <table name="t_role_data_permission" view="colnames">
 <left>167</left>
 <top>601</top>
-<width>174</width>
+<width>130</width>
 <height>175</height>
 <sql_create_table>CREATE TABLE `t_role_data_permission` (
   `id` bigint(32) NOT NULL COMMENT '角色数据权限id',
@@ -239,7 +240,8 @@
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_modifier` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   `last_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNN_dic_type` (`dic_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表'</sql_create_table>
 </table>
 <table name="t_sys_dic_item" view="colnames">
@@ -271,7 +273,6 @@
 <height>266</height>
 <sql_create_table>CREATE TABLE `t_sys_parameter` (
   `id` bigint(32) NOT NULL COMMENT 'id',
-  `parameter_group` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '参数组',
   `parameter_name` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '参数名称',
   `parameter_key` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '参数键',
   `parameter_value` varchar(300) COLLATE utf8_bin DEFAULT NULL COMMENT '参数值',
@@ -284,7 +285,7 @@
   `last_modifier` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   `last_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_t_sys_parameter_unique` (`parameter_group`,`parameter_name`,`parameter_key`)
+  UNIQUE KEY `IDX_t_sys_parameter_unique` (`parameter_name`,`parameter_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统参数'</sql_create_table>
 </table>
 </tables>

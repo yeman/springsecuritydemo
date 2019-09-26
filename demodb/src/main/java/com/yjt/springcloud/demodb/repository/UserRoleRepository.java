@@ -3,7 +3,11 @@ package com.yjt.springcloud.demodb.repository;
 import com.yjt.springcloud.demodb.entity.Role;
 import com.yjt.springcloud.demodb.entity.UserRole;
 import com.yjt.springcloud.demodb.orm.BaseRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.Nullable;
 
 import java.util.List;
 
@@ -17,4 +21,6 @@ import java.util.List;
 public interface UserRoleRepository extends BaseRepository<UserRole,Long> {
 
     List<UserRole> findByRole(Role role);
+
+    void deleteByRole(Role role);
 }

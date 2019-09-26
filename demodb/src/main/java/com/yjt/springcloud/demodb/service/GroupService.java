@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.yjt.springcloud.demodb.entity.Group;
 import com.yjt.springcloud.demodb.entity.dto.GroupTreeVo;
-import com.yjt.springcloud.demodb.service.dto.GroupRoleQueryCriteria;
-import com.yjt.springcloud.demodb.service.dto.GroupUserQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.GroupRoleQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.GroupUserQueryCriteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -33,13 +33,13 @@ public interface GroupService {
 
     Page groupRole(GroupRoleQueryCriteria criteria, Pageable pageable);
 
-    void assginRole(JSONObject jsonObject);
+    void insertRole(JSONObject jsonObject);
 
     void delRole(JSONArray jsonArray);
 
     Page groupUser(GroupUserQueryCriteria criteria, Pageable pageable);
 
-    void assginUser(JSONObject jsonObject);
+    void insertUser(JSONObject jsonObject);
 
     void delUser(JSONArray jsonArray);
 }

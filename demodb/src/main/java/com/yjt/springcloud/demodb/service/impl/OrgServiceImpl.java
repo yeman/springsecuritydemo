@@ -56,7 +56,7 @@ public class OrgServiceImpl implements OrgService {
     public void delete(Long orgId) {
         Optional<Org> optional = orgRepository.findById(orgId);
         if (optional.isPresent()) {
-            List<Org> subList = orgRepository.findByParentId(orgId);
+            List<Org> subList = orgRepository.findByParentIdOrderBySortOrder(orgId);
             List<User> userList = userRepository.findByOrgId(orgId);
             if (!subList.isEmpty()) {
                 throw new BusinessException("机构存在下级机构,无法删除");
@@ -102,11 +102,11 @@ public class OrgServiceImpl implements OrgService {
      * @return com.yjt.springcloud.demodb.entity.Org
      */
     protected Org bulidLeaf(Org org, List<Org> children) {
-        List<Org> childrens = orgRepository.findByParentId(org.getId());
+        List<Org> childrens = orgRepository.findByParentIdOrderBySortOrder(org.getId());
         if (!childrens.isEmpty()) {
             org.setChildren(childrens);
             childrens.stream().forEach(e -> {
-                bulidLeaf(e, orgRepository.findByParentId(e.getId()));
+                bulidLeaf(e, orgRepository.findByParentIdOrderBySortOrder(e.getId()));
             });
         }
         return org;

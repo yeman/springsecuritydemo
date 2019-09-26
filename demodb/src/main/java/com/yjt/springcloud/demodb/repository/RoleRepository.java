@@ -6,6 +6,7 @@ import com.yjt.springcloud.demodb.orm.BaseRepository;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +20,8 @@ import java.util.Optional;
  */
 public interface RoleRepository extends BaseRepository<Role,Long> {
 
-    List<Role> findByParentId(Long id);
+    List<Role> findByParentIdOrderBySortOrder(Long id);
 
-    Optional<Role> findByParentIdIsNull();
+    Optional<Role> findByParentIdIsNullOrderBySortOrder();
+
 }

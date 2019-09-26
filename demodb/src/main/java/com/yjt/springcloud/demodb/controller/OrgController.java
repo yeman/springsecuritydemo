@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("org")
+@RequestMapping("system/org")
 public class OrgController {
 
     @Autowired

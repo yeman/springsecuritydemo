@@ -1,5 +1,6 @@
 package com.yjt.springcloud.demodb.config;
 
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.google.common.collect.Lists;
@@ -25,6 +26,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue,SerializerFeature.WriteNullStringAsEmpty);
         List<MediaType> mediaTypes = Lists.newArrayList();
         mediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
         fastJsonHttpMessageConverter.setSupportedMediaTypes(mediaTypes);

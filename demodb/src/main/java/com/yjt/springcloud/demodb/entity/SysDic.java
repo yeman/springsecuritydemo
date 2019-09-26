@@ -3,22 +3,24 @@ package com.yjt.springcloud.demodb.entity;
 
 import com.google.common.collect.Sets;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @Table(name = "t_sys_dic")
 public class SysDic extends BaseEnity{
 
     @Id
-
     private Long id;
 
-    @Column(name = "dic_type")
+    @Column(name = "dic_type",unique = true)
     private String dicType;
 
     @Column(name = "dic_type_name")
@@ -33,7 +35,8 @@ public class SysDic extends BaseEnity{
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "sysDic")
+
+    @OneToMany(mappedBy = "sysDic",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     private Set<SysDicItem> items = Sets.newHashSet();
 
 }

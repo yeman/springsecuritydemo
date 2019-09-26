@@ -4,6 +4,8 @@ import com.yjt.springcloud.demodb.entity.SysDic;
 import com.yjt.springcloud.demodb.orm.BaseRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * 系统字典
  * ClassName: SysDicRepository
@@ -12,4 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * version V1.0
  */
 public interface SysDicRepository extends BaseRepository<SysDic,Long> {
+    List<SysDic> findByEnableOrderByCreateTime(String enable);
 }

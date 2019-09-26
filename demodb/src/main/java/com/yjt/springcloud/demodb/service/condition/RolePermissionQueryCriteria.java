@@ -1,21 +1,19 @@
-package com.yjt.springcloud.demodb.service.dto;
+package com.yjt.springcloud.demodb.service.condition;
 
 import com.yjt.springcloud.demodb.anotation.Query;
 import lombok.Data;
 
 /**
- * 组角色查询
- * ClassName: GroupRoleQueryCriteria
- * Date: 2019-09-16 21:38
+ * TODO
+ * ClassName: RolePermissionQueryCriteria
+ * Date: 2019-09-21 17:09
  * author Administrator
  * version V1.0
  */
 @Data
-public class GroupUserQueryCriteria {
-
-
-    @Query(propName="groupId",joinName = "group")
-    private Long groupId;
+public class RolePermissionQueryCriteria {
+    @Query(propName="id",joinName = "role")
+    private Long roleId;
 
     @Query(propName="userName",joinName = "user",type = Query.Type.INNER_LIKE)
     private String userName;
@@ -28,6 +26,4 @@ public class GroupUserQueryCriteria {
 
     @Query(propName="email",joinName = "user",type = Query.Type.INNER_LIKE)
     private String email;
-
-
 }
