@@ -17,7 +17,7 @@ import java.util.Optional;
  */
 public interface GroupRepository extends BaseRepository<Group,Long> {
 
-    List<Group> findByParentId(Long groupId);
+    List<Group> findByParentIdOrderBySortOrder(Long groupId);
 
-    Optional<Group> findByParentIdIsNull();
+    Optional<Group> findByParentIdIsNullOrderBySortOrder();
 }

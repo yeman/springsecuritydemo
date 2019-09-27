@@ -3,13 +3,8 @@ package com.yjt.springcloud.demodb.repository;
 import com.yjt.springcloud.demodb.entity.Group;
 import com.yjt.springcloud.demodb.entity.GroupRole;
 import com.yjt.springcloud.demodb.orm.BaseRepository;
-import com.yjt.springcloud.demodb.service.dto.GroupRoleQueryCriteria;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.lang.Nullable;
 
 import java.util.List;
 

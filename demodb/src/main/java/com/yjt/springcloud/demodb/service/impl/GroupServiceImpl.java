@@ -9,8 +9,8 @@ import com.yjt.springcloud.demodb.entity.*;
 import com.yjt.springcloud.demodb.entity.dto.GroupTreeVo;
 import com.yjt.springcloud.demodb.repository.*;
 import com.yjt.springcloud.demodb.service.GroupService;
-import com.yjt.springcloud.demodb.service.dto.GroupRoleQueryCriteria;
-import com.yjt.springcloud.demodb.service.dto.GroupUserQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.GroupRoleQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.GroupUserQueryCriteria;
 import com.yjt.springcloud.demodb.service.mapper.GroupMapper;
 import com.yjt.springcloud.demodb.service.mapper.GroupRoleMapper;
 import com.yjt.springcloud.demodb.service.mapper.UserGroupMapper;
@@ -69,11 +69,11 @@ public class GroupServiceImpl implements GroupService {
 
     protected List<Group> groupChildrenList(Group group,List<Group> children){
         children.add(group);
-        List<Group> childrens = groupRepository.findByParentId(group.getGroupId());
+        List<Group> childrens = groupRepository.findByParentIdOrderBySortOrder(group.getGroupId());
         if(!childrens.isEmpty()){
             children.addAll(childrens);
             children.stream().forEach(e->{
-                groupChildrenList(e,groupRepository.findByParentId(group.getGroupId()));
+                groupChildrenList(e,groupRepository.findByParentIdOrderBySortOrder(e.getGroupId()));
             });
         }
         return children;
@@ -116,7 +116,7 @@ public class GroupServiceImpl implements GroupService {
                 return groupMapper.toDto(group);
             }
         } else {
-            Optional<Group> current = groupRepository.findByParentIdIsNull();
+            Optional<Group> current = groupRepository.findByParentIdIsNullOrderBySortOrder();
             if(current.isPresent()){
                 Group group=  bulidLeaf(current.get(), Lists.newArrayList());
                 return groupMapper.toDto(group);
@@ -132,7 +132,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void assginRole(JSONObject jsonObject) {
+    public void insertRole(JSONObject jsonObject) {
         Long groupId = jsonObject.getLong("groupId");
         Assert.notNull(groupId,"组不为空");
         Assert.notEmpty(jsonObject.getJSONArray("roleIds"),"角色不为空");
@@ -163,7 +163,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void assginUser(JSONObject jsonObject) {
+    public void insertUser(JSONObject jsonObject) {
         Long groupId = jsonObject.getLong("groupId");
         Assert.notNull(groupId,"组不为空");
         Assert.notEmpty(jsonObject.getJSONArray("userIds"),"用户不为空");
@@ -188,11 +188,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     protected Group bulidLeaf(Group group, List<Group> children) {
-        List<Group> childrens = groupRepository.findByParentId(group.getGroupId());
+        List<Group> childrens = groupRepository.findByParentIdOrderBySortOrder(group.getGroupId());
         if (!childrens.isEmpty()) {
             group.setChildren(childrens);
             childrens.stream().forEach(e -> {
-                bulidLeaf(e, groupRepository.findByParentId(e.getGroupId()));
+                bulidLeaf(e, groupRepository.findByParentIdOrderBySortOrder(e.getGroupId()));
             });
         }
         return group;

@@ -1,7 +1,15 @@
 package com.yjt.springcloud.demodb.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.yjt.springcloud.demodb.entity.Permission;
 import com.yjt.springcloud.demodb.entity.Role;
+import com.yjt.springcloud.demodb.entity.dto.PermissionVo;
 import com.yjt.springcloud.demodb.entity.dto.RoleTreeVo;
+import com.yjt.springcloud.demodb.service.condition.RolePermissionQueryCriteria;
+import com.yjt.springcloud.demodb.service.condition.UserRoleQueryCriteria;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -25,7 +33,17 @@ public interface RoleService {
 
     void deleteById(@NotNull Long roleId);
 
-    void assginUser(List<Long> userIds, Long roleId);
+    void insertUser(List<Long> userIds, Long roleId);
 
     RoleTreeVo tree(Map param);
+
+    List<PermissionVo> queryPermission(Long roleId);
+
+    void delUser(JSONArray jsonArray);
+
+    Page roleUser(UserRoleQueryCriteria criteria, Pageable pageable);
+
+    Page roleUserWaitAssginPage(UserRoleQueryCriteria criteria, Pageable pageable);
+
+    void insertPermission(Long roleId, List<Long> permissionIds);
 }

@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class UserDetailVo implements UserDetails {
@@ -34,8 +35,8 @@ public class UserDetailVo implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        LocalDate localDate = LocalDate.now();
-        return !localDate.isAfter(user.getAccountExpiredDate());
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return !localDateTime.isAfter(user.getAccountExpiredDate());
     }
 
     @Override
@@ -45,8 +46,8 @@ public class UserDetailVo implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        LocalDate localDate = LocalDate.now();
-        return !localDate.isAfter(user.getPasswdWordExpiredDate());
+        LocalDateTime localDateTime = LocalDateTime.now();
+        return !localDateTime.isAfter(user.getPasswdWordExpiredDate());
     }
 
     @Override

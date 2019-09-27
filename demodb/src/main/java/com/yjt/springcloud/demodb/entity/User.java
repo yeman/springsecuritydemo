@@ -9,6 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -65,10 +66,10 @@ public class User extends BaseEnity {
     private String avatar;
 
     @Column(name = "password_expire_date",columnDefinition = "TIMESTAMP")
-    private LocalDate passwdWordExpiredDate;
+    private LocalDateTime passwdWordExpiredDate;
 
     @Column(name = "account_expire_date",columnDefinition = "TIMESTAMP")
-    private LocalDate accountExpiredDate;
+    private LocalDateTime accountExpiredDate;
 
     @OneToMany(mappedBy = "role",fetch = FetchType.EAGER)
     private Set<UserRole> roles = Sets.newHashSet();

@@ -1,30 +1,32 @@
 package com.yjt.springcloud.demodb.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @Table(name = "t_sys_dic_item")
 public class SysDicItem extends BaseEnity{
 
     @Id
-
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH},optional = false)
-    @JoinColumn(name = "dic_id")
+    @ManyToOne(cascade = {CascadeType.DETACH},optional = false)
+    @JoinColumn(name = "dic_id",nullable = false)
     private SysDic sysDic;
 
-    @Column(name = "lable_code")
-    private String lableCode;
+    @Column(name = "label_code")
+    private String labelCode;
 
     @Column(name = "label_name")
-    private String lableName;
+    private String labelName;
 
     @Column(name = "enable")
     private String enable;

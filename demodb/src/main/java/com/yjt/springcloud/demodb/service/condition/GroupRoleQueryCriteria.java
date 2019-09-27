@@ -1,7 +1,6 @@
-package com.yjt.springcloud.demodb.service.dto;
+package com.yjt.springcloud.demodb.service.condition;
 
 import com.yjt.springcloud.demodb.anotation.Query;
-import com.yjt.springcloud.demodb.entity.Group;
 import lombok.Data;
 
 /**

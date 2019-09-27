@@ -17,6 +17,6 @@ import java.util.Optional;
  */
 public interface OrgRepository extends BaseRepository<Org,Long> {
 
-    List<Org> findByParentId(Long orgId);
+    List<Org> findByParentIdOrderBySortOrder(Long orgId);
 
 }

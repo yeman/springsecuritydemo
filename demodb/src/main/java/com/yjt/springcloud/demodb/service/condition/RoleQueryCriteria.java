@@ -1,4 +1,4 @@
-package com.yjt.springcloud.demodb.entity.condition;
+package com.yjt.springcloud.demodb.service.condition;
 
 import com.yjt.springcloud.demodb.anotation.Query;
 import lombok.Data;
@@ -7,13 +7,13 @@ import java.util.Date;
 
 /**
  * 角色查询条件
- * ClassName: RoleCondition
+ * ClassName: RoleQueryCriteria
  * Date: 2019-09-11 21:42
  * author Administrator
  * version V1.0
  */
 @Data
-public class RoleCondition {
+public class RoleQueryCriteria {
 
     @Query(type = Query.Type.INNER_LIKE)
     private String roleName;
