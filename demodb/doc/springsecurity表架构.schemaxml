@@ -241,7 +241,7 @@
   `last_modifier` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   `last_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UNN_dic_type` (`dic_type`)
+  UNIQUE KEY `UNN_DIC_TYPE` (`dic_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表'</sql_create_table>
 </table>
 <table name="t_sys_dic_item" view="colnames">
@@ -252,7 +252,7 @@
 <sql_create_table>CREATE TABLE `t_sys_dic_item` (
   `id` bigint(32) NOT NULL COMMENT 'id',
   `dic_id` bigint(32) DEFAULT NULL COMMENT '字典表id',
-  `lable_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '编码',
+  `label_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '编码',
   `label_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '编码名称',
   `enable` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '状态启用:Y 停用:N',
   `sort_order` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '排序',
@@ -262,7 +262,7 @@
   `last_modifier` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '修改人',
   `last_modify_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_unique_dic_item` (`dic_id`,`lable_code`),
+  UNIQUE KEY `IDX_unique_dic_item` (`dic_id`,`label_code`),
   CONSTRAINT `FK_t_sys_dic_item_dicId` FOREIGN KEY (`dic_id`) REFERENCES `t_sys_dic` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='系统码表字典'</sql_create_table>
 </table>
