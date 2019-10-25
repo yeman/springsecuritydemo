@@ -1,7 +1,9 @@
 package com.yjt.springcloud.demodb.validateCode;
 
+import com.yjt.springcloud.demodb.validateCode.image.ImageValidateCodeProperties;
+import com.yjt.springcloud.demodb.validateCode.sms.SmsValidateCodeProperties;
 import lombok.Data;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,41 +13,25 @@ import org.springframework.context.annotation.Configuration;
  * author Administrator
  * version V1.0
  */
-@Configuration
 @Data
-@ConditionalOnProperty(prefix="sys.captcha")
+@ConfigurationProperties(prefix = "captcha")
 public class ValidateCodeConfig {
 
     private String enable;
+
     /**
-     * 验证码类型 短信SMS,图片验证
+     * 验证码类型 短信SMS,图片验证 IMAGE
      */
     private String type;
-
-    /**
-     * 验证码复杂度
-     */
-    private String complexity;
-
-    private int width;
-
-    private int height;
-
-    /**
-     * 图片验证码位数
-     */
-    private int textcount;
-
-    /**
-     * 数学计算验证码位数
-     */
-    private int mathcount;
 
     /**
      * 验证码有效期
      */
     private Long expiration;
 
+    private ImageValidateCodeProperties imageValidateCodeProperties;
+
+    private SmsValidateCodeProperties smsValidateCodeProperties;
 
 
 }

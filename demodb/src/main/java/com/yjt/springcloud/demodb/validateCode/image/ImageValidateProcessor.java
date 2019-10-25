@@ -1,6 +1,8 @@
-package com.yjt.springcloud.demodb.validateCode;
+package com.yjt.springcloud.demodb.validateCode.image;
 
 import cn.hutool.core.util.ImageUtil;
+import com.yjt.springcloud.demodb.validateCode.ValidateCodeConfig;
+import com.yjt.springcloud.demodb.validateCode.ValidateProcessor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * author Administrator
  * version V1.0
  */
-public class ImageValidateProcessor implements ValidateProcessor{
+public class ImageValidateProcessor implements ValidateProcessor {
 
     private ValidateCodeConfig validateCodeConfig;
 

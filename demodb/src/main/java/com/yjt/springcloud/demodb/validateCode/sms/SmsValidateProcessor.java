@@ -1,4 +1,4 @@
-package com.yjt.springcloud.demodb.validateCode;
+package com.yjt.springcloud.demodb.validateCode.sms;
 
 /**
  * TODO
