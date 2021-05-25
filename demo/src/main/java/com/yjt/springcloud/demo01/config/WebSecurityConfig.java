@@ -1,5 +1,9 @@
 package com.yjt.springcloud.demo01.config;
 
+import com.yjt.springcloud.demo01.config.handler.MyAuthenticationFailureHandler;
+import com.yjt.springcloud.demo01.config.handler.MyAuthenticationSuccessHandler;
+import com.yjt.springcloud.demo01.config.properties.SecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +18,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private SecurityProperties securityProperties;
+
+    @Autowired
+    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
+    @Autowired
+    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+
     /**
      *  index首页免权限访问
      *  表单登录页面 /login
@@ -21,12 +35,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String redirectUrl = securityProperties.getBrowser().getLoginPage();
         http.authorizeRequests()
                .antMatchers("/","/index","/kaptcha/*","/captcha/*").permitAll()
+               .and().formLogin().loginPage("/authentication/require")
+                                 .loginProcessingUrl("/authentication/form")
+                                 .successHandler(myAuthenticationSuccessHandler)
+                                 .failureHandler(myAuthenticationFailureHandler)
+                //不需要权限认证
+               .and().logout().permitAll()
+               .and().authorizeRequests().antMatchers("/authentication/require",redirectUrl).permitAll()
                .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll().and()
-               .logout().permitAll()
-                .and().csrf().disable();
+               .and().csrf().disable();
     }
     //webjar中的静态资源不被拦截
     @Override

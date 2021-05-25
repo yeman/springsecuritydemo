@@ -20,22 +20,27 @@ public final class Result {
     /**
      * 成功消息
      **/
-    private static final String SUCCESS_MSG = "成功";
+    public static final String SUCCESS_MSG = "成功";
 
     /**
      * 失败消息
      **/
-    private static final String FAILURE_MSG = "失败";
+    public static final String FAILURE_MSG = "失败";
 
     /**
      * 成功状态
      **/
-    private static final String SUCCESS_STATUS = "1";
+    public static final String SUCCESS_STATUS = "1";
 
     /**
      * 失败状态
      **/
-    private static final String FAILURE_STATUS = "0";
+    public static final String FAILURE_STATUS = "0";
+
+    /**
+     * 会话失效
+     **/
+    public static final String SESSION_OUT = "-1";
 
     /**
      * 交易id
@@ -141,6 +146,18 @@ public final class Result {
      * @return com.yjt.springcloud.demo01.common.Result
      */
     public static Result failed(Object data, String msg, String error) {
-        return Result.builder().status(FAILURE_STATUS).data(data).msg(msg).stackMsg(error).build();
+        return  Result.builder().status(FAILURE_STATUS).data(data).msg(msg).stackMsg(error).build();
+    }
+    
+    /** 
+     * @description 状态和消息
+     * @author YM
+     * @date 2021/5/25 17:29
+     * @param status
+     * @param msg
+\     * @return com.yjt.springcloud.demo01.common.Result
+     */
+    public static Result failed(String status, String msg) {
+        return Result.builder().status(status).msg(msg).build();
     }
 }
