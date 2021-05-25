@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("kaptcha")
 public class ValidateCodeController {
-   /* @Autowired
+    /*@Autowired
     private Kaptcha kaptcha;
 
     @GetMapping("/render")

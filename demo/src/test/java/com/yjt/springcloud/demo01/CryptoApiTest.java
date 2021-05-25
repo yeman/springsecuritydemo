@@ -1,6 +1,7 @@
 package com.yjt.springcloud.demo01;
 
 
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
@@ -9,6 +10,12 @@ import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import org.junit.Test;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * @ClassName CryptoApiTest
@@ -36,13 +43,25 @@ public class CryptoApiTest {
 
     // aes 对称加密解密
     @Test
-    public void testAes() {
+    public void testAes() throws NoSuchAlgorithmException {
         String data = "中华人民共和国";
         //hex bba50ed97f40e2748cd8b0d081607de089226b2354db6ac9ed7fbedb5ce154ca
         //base64 qeC+xe2HiLm5F0Tei3n93VQaGvSttql3EBnQX5Oy+xQ=
-        //随机生成密钥
-        byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
-        SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, key);
+
+        /*自定义明文加密key
+        String publicKeyStr ="wuhan";
+        KeyGenerator keyGenerator = KeyGenerator.getInstance(SymmetricAlgorithm.AES.getValue());
+        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+        secureRandom.setSeed(publicKeyStr.getBytes());
+        keyGenerator.init(128,secureRandom);
+        SecretKey secretKey = keyGenerator.generateKey();
+        byte[] byteKey = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue(),secretKey.getEncoded()).getEncoded();
+        */
+
+        // 密钥要求 Key length not 128/192/256 bits.
+        byte[] byteKey = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
+        System.out.println("密钥:"+ Base64.encode(byteKey));
+        SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.AES, byteKey);
         String encodeStr = new String(aes.encryptHex(data));
         System.out.println("hex加密:" + encodeStr);
         String decodeStr = aes.decryptStr(encodeStr);
@@ -114,7 +133,8 @@ public class CryptoApiTest {
         //hex e35218df2a9d07af77a583b99d598bbce914449630b81650cd7f5bebe21be37e
         //base64 41IY3yqdB693pYO5nVmLvOkURJYwuBZQzX9b6+Ib434=
         //随机生成密钥
-        byte[] key = "datong".getBytes();
+        byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.AES.getValue()).getEncoded();
+        System.out.println("加密key:"+ Base64.encode(key));
         SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.PBEWithMD5AndDES, key);
         String encodeStr = new String(aes.encryptHex(data));
         System.out.println("hex加密:" + encodeStr);
