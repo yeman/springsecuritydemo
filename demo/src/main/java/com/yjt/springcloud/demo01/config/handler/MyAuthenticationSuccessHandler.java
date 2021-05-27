@@ -29,6 +29,7 @@ public class MyAuthenticationSuccessHandler  extends SavedRequestAwareAuthentica
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Override

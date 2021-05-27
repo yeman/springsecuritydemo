@@ -1,5 +1,6 @@
 package com.yjt.springcloud.demo01.config.properties;
 
+import com.yjt.springcloud.demo01.constant.SecurityConstant;
 import com.yjt.springcloud.demo01.enums.LoginType;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ import lombok.Data;
 @Data
 public class BrowserProperties {
 
-    private String loginPage = "/login.html";
+    private String loginPage = SecurityConstant.DEFAULT_LOGIN_PAGE;
+
     private LoginType loginType = LoginType.REDIRECT;
 }

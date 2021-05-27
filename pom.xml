@@ -28,8 +28,7 @@
         <spring-druid-version>1.1.9</spring-druid-version>
         <!--<mysql.version>5.1.6</mysql.version>-->
         <mysql.version>8.0.11</mysql.version>
-        <redis.version>2.2.2.RELEASE</redis.version>
-        <oauth2.autoconfigure.version>2.1.2.RELEASE</oauth2.autoconfigure.version>
+        <spring-security-oauth2-autoconfigure.version>2.1.2.RELEASE</spring-security-oauth2-autoconfigure.version>
         <jwt.version>0.9.1</jwt.version>
         <fastjson.version>1.2.46</fastjson.version>
         <spring.boot.starter.jpa.version>2.1.6.RELEASE</spring.boot.starter.jpa.version>
@@ -60,11 +59,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-            <version>${oauth2.autoconfigure.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -116,12 +110,15 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>${redis.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
-            <version>${redis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>${spring-security-oauth2-autoconfigure.version}</version>
         </dependency>
 
 

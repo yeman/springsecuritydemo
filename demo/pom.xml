@@ -13,6 +13,10 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>demo</name>
     <description>Demo project for Spring Boot</description>
+    <properties>
+        <!--<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>-->
+    </properties>
 
     <dependencies>
         <dependency><!--Web相关依赖-->

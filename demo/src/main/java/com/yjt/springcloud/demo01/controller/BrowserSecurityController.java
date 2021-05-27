@@ -2,6 +2,7 @@ package com.yjt.springcloud.demo01.controller;
 
 import com.yjt.springcloud.demo01.common.Result;
 import com.yjt.springcloud.demo01.config.properties.SecurityProperties;
+import com.yjt.springcloud.demo01.constant.SecurityConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class BrowserSecurityController {
      * @param response
      * @return com.yjt.springcloud.demo01.common.Result
      */
-    @RequestMapping("/authentication/require")
+    @RequestMapping(value = SecurityConstant.DEFAULT_UNAUTHENTICATED_URL)
     public Result requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {

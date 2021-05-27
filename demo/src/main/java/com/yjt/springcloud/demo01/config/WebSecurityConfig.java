@@ -1,8 +1,11 @@
 package com.yjt.springcloud.demo01.config;
 
+import com.yjt.springcloud.demo01.config.configurerAdapter.ValidateCodeConfigureAdapter;
 import com.yjt.springcloud.demo01.config.handler.MyAuthenticationFailureHandler;
 import com.yjt.springcloud.demo01.config.handler.MyAuthenticationSuccessHandler;
 import com.yjt.springcloud.demo01.config.properties.SecurityProperties;
+import com.yjt.springcloud.demo01.config.service.MyUserDetailService;
+import com.yjt.springcloud.demo01.constant.SecurityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +14,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import static com.yjt.springcloud.demo01.constant.SecurityConstant.*;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
 
+    @Autowired
+    private MyUserDetailService myUserDetailService;
+
+    @Autowired
+    private ValidateCodeConfigureAdapter validateCodeConfigureAdapter;
+
     /**
      *  index首页免权限访问
      *  表单登录页面 /login
@@ -35,32 +46,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String redirectUrl = securityProperties.getBrowser().getLoginPage();
-        http.authorizeRequests()
-               .antMatchers("/","/index","/kaptcha/*","/captcha/*").permitAll()
-               .and().formLogin().loginPage("/authentication/require")
-                                 .loginProcessingUrl("/authentication/form")
-                                 .successHandler(myAuthenticationSuccessHandler)
-                                 .failureHandler(myAuthenticationFailureHandler)
-                //不需要权限认证
-               .and().logout().permitAll()
-               .and().authorizeRequests().antMatchers("/authentication/require",redirectUrl).permitAll()
-               .anyRequest().authenticated()
-               .and().csrf().disable();
+        http.apply(validateCodeConfigureAdapter)
+             .and()
+             .formLogin()
+            .loginPage(DEFAULT_UNAUTHENTICATED_URL)
+            .loginProcessingUrl(DEFAULT_LOGIN_PROCESSING_FORM_URL)
+            .successHandler(myAuthenticationSuccessHandler)
+            .failureHandler(myAuthenticationFailureHandler)
+
+            .and().logout().permitAll().and()
+            .authorizeRequests()
+            .antMatchers(DEFAULT_VALIDATE_CODE_URL_PREFIX + "/**",
+                    DEFAULT_UNAUTHENTICATED_URL+"/**",
+                    SecurityConstant.DEFAULT_LOGIN_PAGE,
+                    securityProperties.getBrowser().getLoginPage())
+            .permitAll()
+            .anyRequest().authenticated()
+            .and().userDetailsService(myUserDetailService)
+            .csrf().disable();
+
+
     }
+
     //webjar中的静态资源不被拦截
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/webjars/**", "/img/**");
     }
 
-    @Override
+   /* @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       //用户 内存认证管理器
+        //用户 内存认证管理器
         auth.inMemoryAuthentication().withUser("root").password("root").roles("admin");
-    }
+    }*/
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

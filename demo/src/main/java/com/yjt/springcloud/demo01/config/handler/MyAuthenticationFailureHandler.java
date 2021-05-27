@@ -3,6 +3,7 @@ package com.yjt.springcloud.demo01.config.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yjt.springcloud.demo01.config.properties.SecurityProperties;
 import com.yjt.springcloud.demo01.enums.LoginType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -22,18 +23,20 @@ import java.io.IOException;
  * @version V1.0
  * @since 1.0
  **/
+@Slf4j
 @Component
 public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Autowired
     private SecurityProperties securityProperties;
 
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         LoginType loginType = securityProperties.getBrowser().getLoginType();
-
+        logger.info("认证失败");
         //重定向
         if(LoginType.REDIRECT.equals(loginType)){
             super.onAuthenticationFailure(request,response,exception);
