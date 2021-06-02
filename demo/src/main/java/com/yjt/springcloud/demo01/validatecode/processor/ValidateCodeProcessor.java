@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  **/
 public interface ValidateCodeProcessor {
 
-    public void createCode(ServletWebRequest request);
+    public void create(ServletWebRequest request);
 
-    public void validateCode(ServletWebRequest servletWebRequest);
+    public void validate(ServletWebRequest servletWebRequest);
 }

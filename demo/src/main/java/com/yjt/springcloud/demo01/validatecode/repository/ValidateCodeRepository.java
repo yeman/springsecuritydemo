@@ -2,6 +2,7 @@ package com.yjt.springcloud.demo01.validatecode.repository;
 
 import com.yjt.springcloud.demo01.validatecode.bean.ValidateCode;
 import com.yjt.springcloud.demo01.validatecode.enums.ValidateCodeEnum;
+import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
@@ -16,7 +17,10 @@ public interface ValidateCodeRepository {
 
     void save(ServletWebRequest request, ValidateCode code, ValidateCodeEnum validateCodeEnum);
 
-    ValidateCode get(ServletWebRequest request, ValidateCodeEnum validateCodeType);
+    @Nullable
+    ValidateCode get(ServletWebRequest request, ValidateCodeEnum validateCodeEnum);
 
-    void remove(ServletWebRequest request, ValidateCodeEnum validateCodeType);
+    void remove(ServletWebRequest request, ValidateCodeEnum validateCodeEnum);
+
+    String buildKey(ServletWebRequest request, ValidateCodeEnum validateCodeEnum);
 }

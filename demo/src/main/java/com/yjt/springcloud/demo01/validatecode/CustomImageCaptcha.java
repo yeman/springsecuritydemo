@@ -5,7 +5,8 @@ import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import com.yjt.springcloud.demo01.validatecode.exception.ValidateCodeExpireException;
+import com.yjt.springcloud.demo01.validatecode.exception.ValidateCodeException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @version V1.0
  * @since 1.0
  **/
+@Slf4j
 @Component
 public class CustomImageCaptcha implements Captcha {
 
@@ -51,7 +53,8 @@ public class CustomImageCaptcha implements Captcha {
     @Value("${captcha.wordSize:5}")
     private int wordSize;
 
-    private static final String VALIDATE_CODE_CACHE_KEY = "validateCode:web:";
+    public static final String VALIDATE_CODE_CACHE_KEY = "validateCode:web:";
+
 
     @Override
     public void render() throws IOException {
@@ -61,6 +64,7 @@ public class CustomImageCaptcha implements Captcha {
             String captchaId = httpServletRequest.getSession().getId();
             String code = wordGenerator.getWord(wordSize);
             BufferedImage challenge = wordToImage.getImage(code);
+            log.debug("验证码有效期{}",validateCodeExpire);
             //缓存redis key
             stringRedisTemplate.opsForValue().set(VALIDATE_CODE_CACHE_KEY + captchaId, code, validateCodeExpire, TimeUnit.SECONDS);
             JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
@@ -89,7 +93,7 @@ public class CustomImageCaptcha implements Captcha {
         String captchaId = httpServletRequest.getSession().getId();
         //验证 captchaId 超时时间
         if (!stringRedisTemplate.hasKey(VALIDATE_CODE_CACHE_KEY + captchaId)) {
-            throw new ValidateCodeExpireException("验证码过期");
+            throw new ValidateCodeException("验证码过期");
         }
         String cachedCode = stringRedisTemplate.opsForValue().get(VALIDATE_CODE_CACHE_KEY + captchaId);
         boolean match = cachedCode.equalsIgnoreCase(code);

@@ -36,5 +36,16 @@ public enum ValidateCodeEnum {
         this.remark = remark;
     }
 
+    public static ValidateCodeEnum ofType(String type) {
+        ValidateCodeEnum[] enums = ValidateCodeEnum.values();
+        for (ValidateCodeEnum validateCodeEnum : enums) {
+            if (validateCodeEnum.getType().equalsIgnoreCase(type)) {
+                return validateCodeEnum;
+            }
+        }
+        return null;
+    }
+
     public abstract String getParameterName();
+
 }

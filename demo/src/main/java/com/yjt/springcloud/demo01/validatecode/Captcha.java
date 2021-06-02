@@ -12,8 +12,14 @@ import java.io.IOException;
  **/
 public interface Captcha {
 
+    int validateCodeExpire = 60;
+
     void render() throws IOException;
 
     boolean validate(String code);
+
+    default int getValidateCodeExpire() {
+        return this.validateCodeExpire;
+    }
 
 }

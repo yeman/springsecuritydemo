@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Optional;
@@ -37,7 +38,8 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
         redisTemplate.opsForValue().set(buildKey(request, validateCodeEnum), validateCode.getCode(), validateCodeExpire, TimeUnit.SECONDS);
     }
 
-    private String buildKey(ServletWebRequest request, ValidateCodeEnum validateCodeEnum) {
+    @Override
+    public String buildKey(ServletWebRequest request, ValidateCodeEnum validateCodeEnum) {
         String deviceId = request.getHeader("deviceId");
         if (StringUtils.isBlank(deviceId)) {
             throw new ValidateCodeException("请在请求头中携带deviceId参数");
@@ -45,6 +47,7 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
         return VALIDATE_CODE_CACHE_KEY + validateCodeEnum.getType().toString().toLowerCase() + ":" + deviceId;
     }
 
+    @Nullable
     @Override
     public ValidateCode get(ServletWebRequest request, ValidateCodeEnum validateCodeEnum) {
         Optional<Object> optional = Optional.ofNullable(redisTemplate.opsForValue().get(buildKey(request, validateCodeEnum)));
@@ -56,7 +59,7 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
     }
 
     @Override
-    public void remove(ServletWebRequest request, ValidateCodeEnum validateCodeType) {
+    public void remove(ServletWebRequest request, ValidateCodeEnum validateCodeEnum) {
 
     }
 }
