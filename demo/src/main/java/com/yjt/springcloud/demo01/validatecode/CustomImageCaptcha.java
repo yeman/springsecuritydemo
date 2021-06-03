@@ -5,6 +5,7 @@ import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.yjt.springcloud.demo01.validatecode.bean.ValidateCode;
 import com.yjt.springcloud.demo01.validatecode.exception.ValidateCodeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class CustomImageCaptcha implements Captcha {
     private StringRedisTemplate stringRedisTemplate;
 
     @Value("${captcha.expireTime:50}")
-    private long validateCodeExpire;
+    private int validateCodeExpire;
 
     @Value("${captcha.wordSize:5}")
     private int wordSize;
@@ -57,16 +58,17 @@ public class CustomImageCaptcha implements Captcha {
 
 
     @Override
-    public void render() throws IOException {
+    public ValidateCode render() throws IOException {
         byte[] captchaChallengeAsJpeg = null;
+        ValidateCode validateCode = null;
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
             String captchaId = httpServletRequest.getSession().getId();
             String code = wordGenerator.getWord(wordSize);
             BufferedImage challenge = wordToImage.getImage(code);
-            log.debug("验证码有效期{}",validateCodeExpire);
-            //缓存redis key
-            stringRedisTemplate.opsForValue().set(VALIDATE_CODE_CACHE_KEY + captchaId, code, validateCodeExpire, TimeUnit.SECONDS);
+            log.debug("验证码有效期{}秒",validateCodeExpire);
+            validateCode = new ValidateCode(code,validateCodeExpire);
+            //stringRedisTemplate.opsForValue().set(VALIDATE_CODE_CACHE_KEY + captchaId, code, validateCodeExpire, TimeUnit.SECONDS);
             JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(jpegOutputStream);
             jpegEncoder.encode(challenge);
         } catch (IllegalArgumentException e) {
@@ -86,6 +88,7 @@ public class CustomImageCaptcha implements Captcha {
         responseOutputStream.write(captchaChallengeAsJpeg);
         responseOutputStream.flush();
         responseOutputStream.close();
+        return validateCode;
     }
 
     @Override

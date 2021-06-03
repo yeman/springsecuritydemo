@@ -1,5 +1,9 @@
 package com.yjt.springcloud.demo01.validatecode.processor;
 
+import com.yjt.springcloud.demo01.validatecode.bean.ValidateCode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.ServletWebRequest;
+
 /**
  * @className ImageValidateCodeProcessor
  * @description TODO
@@ -8,5 +12,11 @@ package com.yjt.springcloud.demo01.validatecode.processor;
  * @version V1.0
  * @since 1.0
  **/
+@Component
 public class ImageValidateCodeProcessor extends AbstractValidateCodeProcessor {
+
+    @Override
+    public void send(ServletWebRequest request, ValidateCode validateCode) {
+
+    }
 }

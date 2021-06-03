@@ -4,6 +4,7 @@ import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.yjt.springcloud.demo01.validatecode.bean.ValidateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +35,9 @@ public class DefaultImageCaptcha implements Captcha {
     private CaptchaService captchaService;
 
     @Override
-    public void render() throws IOException {
+    public ValidateCode render() throws IOException {
         byte[] captchaChallengeAsJpeg = null;
+        ValidateCode validateCode = null;
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
 
@@ -65,6 +67,7 @@ public class DefaultImageCaptcha implements Captcha {
         responseOutputStream.write(captchaChallengeAsJpeg);
         responseOutputStream.flush();
         responseOutputStream.close();
+        return validateCode;
     }
 
 

@@ -1,5 +1,7 @@
 package com.yjt.springcloud.demo01.validatecode;
 
+import com.yjt.springcloud.demo01.validatecode.bean.ValidateCode;
+
 import java.io.IOException;
 
 /**
@@ -14,7 +16,7 @@ public interface Captcha {
 
     int validateCodeExpire = 60;
 
-    void render() throws IOException;
+    ValidateCode render() throws IOException;
 
     boolean validate(String code);
 
