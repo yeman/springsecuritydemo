@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,14 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @PostConstruct
+    public void init(){
+        LoginType loginType = securityProperties.getBrowser().getLoginType();
+        if(LoginType.REDIRECT.equals(loginType)){
+            super.setDefaultFailureUrl(securityProperties.getBrowser().getLoginPage()+"?error");
+        }
+    }
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {

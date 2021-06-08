@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Optional;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @version V1.0
  * @since 1.0
  **/
+@Component
 @ConditionalOnBean(value = {RedisTemplate.class})
 public class RedisValidateCodeRepository implements ValidateCodeRepository {
 

@@ -1,22 +1,20 @@
 package com.yjt.springcloud.demo01.config;
 
 import com.yjt.springcloud.demo01.config.configurerAdapter.ValidateCodeConfigureAdapter;
-import com.yjt.springcloud.demo01.config.handler.MyAuthenticationFailureHandler;
-import com.yjt.springcloud.demo01.config.handler.MyAuthenticationSuccessHandler;
 import com.yjt.springcloud.demo01.config.properties.SecurityProperties;
 import com.yjt.springcloud.demo01.config.service.MyUserDetailService;
 import com.yjt.springcloud.demo01.constant.SecurityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import static com.yjt.springcloud.demo01.constant.SecurityConstant.*;
 
@@ -28,10 +26,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private SecurityProperties securityProperties;
 
     @Autowired
-    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Autowired
-    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+    private AuthenticationFailureHandler authenticationFailureHandler;
 
     @Autowired
     private MyUserDetailService myUserDetailService;
@@ -46,18 +44,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.apply(validateCodeConfigureAdapter)
-             .and()
-             .formLogin()
+        http.formLogin()
             .loginPage(DEFAULT_UNAUTHENTICATED_URL)
             .loginProcessingUrl(DEFAULT_LOGIN_PROCESSING_FORM_URL)
-            .successHandler(myAuthenticationSuccessHandler)
-            .failureHandler(myAuthenticationFailureHandler)
+            .successHandler(authenticationSuccessHandler)
+            .failureHandler(authenticationFailureHandler)
 
+            .and().apply(validateCodeConfigureAdapter)
             .and().logout().permitAll().and()
             .authorizeRequests()
-            .antMatchers(DEFAULT_VALIDATE_CODE_URL_PREFIX + "/**",
-                    DEFAULT_UNAUTHENTICATED_URL+"/**",
+            .antMatchers(DEFAULT_UNAUTHENTICATED_URL,
+                    DEFAULT_VALIDATE_CODE_URL_PREFIX + "/**",
                     SecurityConstant.DEFAULT_LOGIN_PAGE,
                     securityProperties.getBrowser().getLoginPage())
             .permitAll()

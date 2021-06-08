@@ -8,5 +8,5 @@ package com.yjt.springcloud.demo01.sms;
  * version V1.0
  */
 public interface SmsCodeSender {
-    public boolean send(String mobile, String content);
+    boolean send(String mobile, String content);
 }

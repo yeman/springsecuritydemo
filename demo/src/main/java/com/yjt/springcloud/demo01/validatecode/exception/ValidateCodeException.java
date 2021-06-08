@@ -1,5 +1,7 @@
 package com.yjt.springcloud.demo01.validatecode.exception;
 
+import org.springframework.security.core.AuthenticationException;
+
 /**
  * @className ValidateCodeException
  * @description 验证码过期异常
@@ -8,7 +10,7 @@ package com.yjt.springcloud.demo01.validatecode.exception;
  * @version V1.0
  * @since 1.0
  **/
-public class ValidateCodeException extends RuntimeException {
+public class ValidateCodeException extends AuthenticationException {
 
     public ValidateCodeException(String message) {
         super(message);

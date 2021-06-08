@@ -22,7 +22,7 @@ import java.io.IOException;
  * @since 1.0
  **/
 @Slf4j
-@Component(value = "smsCodeGenerator")
+@Component(value = "smsValidateCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator {
 
     @Value("${captcha.wordSize:5}")

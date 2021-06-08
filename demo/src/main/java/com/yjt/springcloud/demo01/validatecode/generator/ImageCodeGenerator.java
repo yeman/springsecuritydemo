@@ -20,7 +20,7 @@ import java.io.IOException;
  * @since 1.0
  **/
 @Slf4j
-@Component(value = "imageCodeGenerator")
+@Component(value = "imageValidateCodeGenerator")
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
     @Autowired

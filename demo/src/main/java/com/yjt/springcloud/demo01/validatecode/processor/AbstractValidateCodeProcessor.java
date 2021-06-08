@@ -29,7 +29,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
     @Autowired
     private Map<String, ValidateCodeGenerator> validateCodeGeneratorMap;
 
-    public static final String PROCESSOR_STR = "CodeProcessor";
+    public static final String PROCESSOR_STR = "ValidateCodeProcessor";
 
     /**
      * @param request
@@ -68,7 +68,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
                 throw new ValidateCodeException("验证码失效");
             }
 
-            if (!c.getCode().equals(codeInRequest)) {
+            if (!c.getCode().equalsIgnoreCase(codeInRequest)) {
                 throw new ValidateCodeException("验证码错误");
             }
 
@@ -91,7 +91,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
             throw new ValidateCodeException("未找到处理器类的类型");
         }
         String type = validateCodeEnum.getType().toLowerCase();
-        String beanName = type + ValidateCodeProcessor.class.getSimpleName();
+        String beanName = type + ValidateCodeGenerator.class.getSimpleName();
         ValidateCodeGenerator validateCodeGenerator = validateCodeGeneratorMap.get(beanName);
         if (validateCodeGenerator == null) {
             throw new ValidateCodeException(String.format("验证码%s生成器类的不存在", beanName));

@@ -23,7 +23,7 @@ public interface SecurityConstant {
     /**
      * 默认的用户名密码登录请求处理url
      **/
-    public String DEFAULT_LOGIN_PROCESSING_FORM_URL = "/login";
+    public String DEFAULT_LOGIN_PROCESSING_FORM_URL = "/authentication/form";
 
     /**
      * 验证码url
@@ -40,4 +40,14 @@ public interface SecurityConstant {
      * 验证短信验证码参数的名称
      */
     String DEFAULT_PARAMETER_NAME_CODE_SMS = "smsCode";
+
+    /**
+     * 默认的表单验证码登录请求处理url
+     */
+    String DEFAULT_LOGIN_PROCESSING_URL_FORM = "/authentication/form";
+
+    /**
+     * 默认的手机验证码登录请求处理url
+     */
+    String DEFAULT_LOGIN_PROCESSING_URL_MOBILE = "/authentication/mobile";
 }

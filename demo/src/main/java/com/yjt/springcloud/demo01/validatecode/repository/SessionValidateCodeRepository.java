@@ -2,9 +2,11 @@ package com.yjt.springcloud.demo01.validatecode.repository;
 
 import com.yjt.springcloud.demo01.validatecode.bean.ValidateCode;
 import com.yjt.springcloud.demo01.validatecode.enums.ValidateCodeEnum;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.lang.Nullable;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.util.Optional;
@@ -17,6 +19,8 @@ import java.util.Optional;
  * @version V1.0
  * @since 1.0
  **/
+@ConditionalOnBean(value = RedisValidateCodeRepository.class)
+@Component
 public class SessionValidateCodeRepository implements ValidateCodeRepository {
 
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
